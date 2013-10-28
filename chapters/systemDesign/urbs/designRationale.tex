@@ -1,11 +1,12 @@
 \subsection{Design Rationale}
 
+The decision to use URBS as a method of restricting and structuring the input curve type was made for several reasons. 
 
-The decision to use a method of restricting and structuring the input curve type was made for several reasons. 
+Firstly the structure that a spline based representation gives to the input data gives natural compression for that data, as compared to storing the location of each individual point upon the desired curve. This effect is easily seen when compared to an array based method of storing curve data for single given line. A number of integers on the order of 20 can store the same amount of data as thousands of bits. However, this effectiveness goes down when approximating a high density of curves per unit of area. In our application, the average density of curve was to be very low. Thus, an URBS curve fit well for data compression. 
 
-Firstly the structure that a spline based representation gives to the input data gives natural compression for that data, as compared to storing the location of each individual point upon the desired curve. This allows for easy storage and manipulation of input curves by the GUI program. 
+This paradigm also allows for easy storage and manipulation of input curves by the GUI program. It also decouples the size and form of the curve from any functions that interact with it, as the curves all have a standard form and all data only represents objects that are of interest. This means that computation interactions were easier to design and were intrinsically flexible to alterations in the makeup of the URBS curves. With an array based method altering something as simple as the relative size of a data set to be printed would create problems and require patches to most of the functions that make up the pathway from data to printing commands.
 
-Secondly the restriction of the curves to splines of the 3rd order ensures that the parametrised curve $\textbf{q}(s)$ has the property of being twice differentiable;
+The restriction of the curves to splines of the 3rd order ensures that the parametrised curve $\textbf{q}(s)$ has the property of being twice differentiable;
 \begin{align*}
 \textbf{q}(s) \in \mathbb{C}^2
 \end{align*}
