@@ -13,16 +13,14 @@
 %From the beginning, we realised that there would need to be a series of modules that would make up the system. There would need to be a module allowing the expression of curves that the user would like drawn, a module converting the curves into a set of movement instructions and a module that transmits those instructions to the printer. On the PLC side we would need to create a module that would receive movement instructions, a module that would interpret those instructions and a module that would cause the motor drivers to act on those instructions. A high level description of the components of the system can be seen in Fig~\ref{fig:system}.
 
 
-\section{Project Overview}
-
-\subsection{Abstract}
+\section{Abstract}
 The DoodleBot Project was a year long undertaking completed by Rahul Victor and Anthony Evans for the  Engineering Capstone Project subject at the University of Melbourne. The produced device was a functional 2.1 axis CNC machine capable of autonomously reproducing bitmap images or photos approximated by B-splines with a pen. The device incorporates open-loop time-optimal control that attempts to complete the drawing accurately in minimum time. As an industry partner, NHP Electrical Engineering Products Pty Ltd proposed the project and provided a significant portion of the hardware for the project. This document will outline the project requirements, detail the engineered solution, justify the design and discuss performance and limitations. 
 
-\subsection{Project Requirements}
+\section{Project Requirements}
 
 The DoodleBot project had two key stakeholders with their own independent requirements to address and satisfy.
 
-\subsubsection{The University of Melbourne, School of Engineering Requirements}
+\subsection{The University of Melbourne, School of Engineering Requirements}
 As part of the Bachelor of Engineering (Electrical) and Master of Engineering (Electrical) courses, students are required to complete a year long subject called the Electrical Capstone Project. Students work on completing a major engineering project designed to develop and showcase practical engineering skills and theory. The expectations of the University were outlined in the available marking criteria and subject guidelines. 
 
 The Melbourne School of Engineering requires the following deliverables:
@@ -41,7 +39,7 @@ Assessment of these is based on the following criteria:
 		\item Quality of presentation (for each deliverable)
 	\end{itemize}
 	
-\subsubsection{NHP Electrical Engineering Products Pty Ltd Requirements}
+\subsection{NHP Electrical Engineering Products Pty Ltd Requirements}
 The DoodleBot is an industry partnered project with NHP Electrical Engineering Products Pty Ltd (henceforth referred to as NHP). NHP's requirements for the project were agreed over several meetings and detailed in a Project Charter produced by the DoodleBot Team.
 
 The agreed deliverables, to be handed over at the conclusion of the year, were:
@@ -59,7 +57,7 @@ The specification of the product are:
 		\item Software to be implemented on PLC and PC, with communication via a ethernet interface;
 	\end{itemize}
 
-\subsection{Project Scope}
+\section{Project Scope}
 The responsibility of the DoodleBot team was to design, implement and construct the following components:
 	\begin{itemize}
 		\item Control problem formulation, solution design and software implementation. Understanding of relevant control concepts
@@ -78,3 +76,11 @@ NHP's role in the project was to:
 	\end{itemize}
 
 
+\section{Performance Indicators}
+In addition to the requirements, the DoodleBot Team identified several key performance indicators to design for:
+
+	\begin{itemize}
+		\item How accurately the mechanical device is able to reproduce the desired input
+		\item How fast the mechanical device is able to draw the desired input
+		\item How well the system is able to create a bicolour representation of the original image
+	\end{itemize}
