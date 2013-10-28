@@ -1,0 +1,51 @@
+\chapter{URBS Weight Derivation}
+The following \cite{website:nurbsExplain} gives a series of derivations of the general case of the weights for URBS splines up to the third order.
+In general;
+\begin{align*}
+W_{i,d}(s) &=   \frac{s - K_i}{K_{i+d} - K_i}W_{i,d-1}(s)  +  \frac{K_{i + d + 1} - s}{K_{i + d + 1} - K_{i+1}}W_{i+1,d-1}(s)\\
+W_{i,0}(s) &= \begin{cases}
+   1 & \text{if } K_i \leq s < K_{i+1} \\
+   0 & \text{otherwise}
+  \end{cases}	
+\end{align*}
+
+Using this recursive formula, we can build up results for first order URBS given $K_i \leq s < K_{i+1}$;
+
+\begin{align*}	
+W_{i-2,0}(s),W_{i+1,0}(s), W_{i-1,0}(s) &= 0\\
+W_{i,0}(s) &= 1 
+\end{align*}
+
+Second order;
+
+\begin{align*}	
+W_{i,1} &= \frac{s - K_i}{K_{i+1} - K_i}W_{i,0}(s)  +  \frac{K_{i + 2} - s}{K_{i + 2} - K_{i+1}}W_{i+1,0}(s)\\
+	 &= \frac{s - K_i}{K_{i+1} - K_i}\\
+	 \\
+W_{i-1,1}(s) &=   \frac{s - K_{i-1}}{K_{i} - K_{i-1}}W_{i-1,0}(s)  +  \frac{K_{i + 1} - s}{K_{i + 1} - K_{i}}W_{i,0}(s)\\
+	&=\frac{K_{i + 1} - s}{K_{i + 1} - K_{i}}
+\end{align*}
+
+Third order;
+
+\begin{align*}
+W_{i,2}(s) &= \frac{s - K_i}{K_{i+2} - K_i}W_{i,1}(s)  +  \frac{K_{i + 3} - s}{K_{i + 3} - K_{i+1}}W_{i+1,1}(s)\\ 
+	&=   \frac{s - K_i}{K_{i+2} - K_i}\frac{s - K_i}{K_{i+1} - K_i}\\ 
+	&= \frac{(s - K_i)^2}{(K_{i+2} - K_i)(K_{i+1} - K_i)}
+\end{align*}
+\begin{align*}
+W_{i-1,2}(s) &= \frac{s - K_{i-1}}{K_{i+1} - K_{i-1}}W_{i-1,1}(s)  +  \frac{K_{i + 2} - s}{K_{i + 2} - K_{i}}W_{i,1}(s)\\ 
+	 &= \frac{s - K_{i-1}}{K_{i+1} - K_{i-1}}\frac{K_{i + 1} - s}{K_{i + 1} - K_{i}} +  \frac{K_{i + 2} - s}{K_{i + 2} - K_{i}}\frac{s - K_i}{K_{i+1} - K_i}
+\end{align*}
+\begin{align*}
+W_{i-2,2}(s) &= \frac{s - K_{i-2}}{K_{i} - K_{i}}W_{i-2,1}(s)  +  \frac{K_{i + 1} - s}{K_{i + 1} - K_{i-1}}W_{i-1,1}(s)\\
+	&=\frac{K_{i + 1} - s}{K_{i + 1} - K_{i-1}}\frac{K_{i + 1} - s}{K_{i + 1} - K_{i}}\\
+&=\frac{(K_{i + 1} - s)^2}{(K_{i + 1} - K_{i-1})(K_{i + 1} - K_{i})}
+\end{align*}
+
+These weightings define the linear combination of the control points creating a point on the curve;
+\begin{align*}
+P(s) = \textbf{N}_i^2W_{i,2}(s) + \textbf{N}_{i-1}^2W_{i-1,2}(s) + \textbf{N}_{i-2}^2W_{i-2,2}(s)
+\end{align*}
+
+for $K_i \leq s < K_{i+1}$.

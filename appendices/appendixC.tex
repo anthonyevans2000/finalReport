@@ -1,0 +1,6 @@
+\chapter{Derivation of $s^*(t)$ given $s^*(s)$}
+
+\begin{align*}
+s(t) &= \sum_{k=1}^{s_k < s(t_k)} \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right) + \left(\left(\frac{(t-t_{last})(\dot{s}^2_{next} - \dot{s}^2_{last})}{2 \Delta s} + \dot{s}_k\right)^2 - \dot{s}^2_k \right)\frac{\Delta s}{(\dot{s}^2_{next} - \dot{s}^2_{last})}\\	
+\Delta t_k(s) &= \int_{s_k}^s \frac{1}{\sqrt{\frac{\dot{s}(s_{k+1}) - \dot{s}(s_{k})}{s_{k+1} - s_{k}}} u + \dot{s}(s_{k})} du
+\end{align*}
