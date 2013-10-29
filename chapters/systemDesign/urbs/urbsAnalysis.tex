@@ -1,32 +1,37 @@
 \subsection{URBS Analysis}
-Given this rationale, 3rd order Uniform Rational Basis Splines (URBS) were used as the curve data structure. The general weighting structure of an URBS is the same for each and every curve, given the uniformity of their knots. URBS are a specific case of the widely used Non-Uniform Rational Basis Splines (NURBS), where the knot vector contains only evenly spaced knots. The knot vector defines one or greater knot spans, which thereon define the rise and decay of weighting for a series of control points, as can be seen in Fig~\ref{fig:nurbsBasis} 
+Given their benefits, 3rd order URBS were used as the curve data structure for the DoodleBot. 
 
-\begin{figure}  
-\includegraphics[width=\textwidth]{figures/optimisation/nurbsBasis.png}
-\caption[3rd order (Quadratic) URBS basis splines]{ These splines represent the weighting of each of the six control points $\textbf{N} \in \{\textbf{N}_0^2, \textbf{N}_1^2 \cdots \textbf{N}_5^2\}$, with the parameter $s \in [0, 1].$ \cite{website:nurbsDemo}  
-\label{fig:nurbsBasis}}
-\end{figure}
+The general weighting structure of an URBS is the same for each and every curve, given the uniformity of their knots. This means that we can easily calculate the basis functions for an URBS given only the number of control points. Thus an URBS curve is completely defined by the number and location of its control points.
 
-For the class of 3rd order URBS used, weighting coefficients that multiply each of the control points quadratically shift across the domain of $s \in [0, 1]$. This brings consecutive control points into prominence evenly as the path parameter is traversed. Each point on the curve consists of a linear combination of the control points $\textbf{N}_i^2, \textbf{N}_{i-1}^2, \textbf{N}_{i-2}^2$, defined by the weighting of their basis function at that point.
+A knot vector is a set of numbers which define the locations of all of the knots that a curve contains. An URBS contains only evenly spaced knots. The knot vector defines the knot spans of a curve. Over each span, only three control points will have non-zero weighting. At the end of each span, one control point's weighting goes to zero and is substituted by another control point, whose weighting begins from zero also. The numeric values of the knots within the vector are unimportant; the curve parametrising variable $s$ starts from the first knot and ends at the last and all knots are evenly spaced. We have arbitrarily defined the knots such that all lie between zero and one.
 
-When the $s$ parameter passes a knot value, such as $s = 0.5$ in Fig~\ref{fig:nurbsBasis}, it signifies that one control point no longer has influence over the position of the path and the next control point will begin to rise in weighting. Note that there are three repeated knots at the beginning and end of a curve. These knots make sure that the curve terminates at the location of the first and last control point. They also ensure that the weighting functions have defined values throughout the recursive calculations.
+The knot vector defines weighting coefficients for each of the control points. The values of these weights quadratically shifts across the domain of $s \in [0, 1]$. This brings consecutive control points into prominence evenly as the path parameter is traversed. Each point on the curve consists of a linear combination of the control points that are non-zero for the knot span. This is demonstrated in the following equation
+\begin{align*}
+q_i(s) = w_i\textbf{N}_i^2 + w_{i-1}\textbf{N}_{i-1}^2 + w_{i-2}\textbf{N}_{i-2}^2
+\end{align*} 
+Where $q_i(s)$ is a point on the path with $s$ inside the $i$th knot span and $N_i^2$ is the $i$th control point.
 
-In this way each point on the curve is defined by a linear combination of three control points and each control point has weighted influence over a similar sized domain on $s$. The weightings for each control point can be determined given the knot vector, which is uniform and defined when one is given the number of control points a curve will contain.
+When the $s$ parameter passes a knot value such as $s = 0.5$ in Fig~\ref{fig:urbsDemo}, it changes the knot span it is within. This signifies that the lowest indexed control point no longer has influence over the position of the path and the control point corresponding to the index of the new knot span will begin to rise in weighting.
+
+In this way each point on the curve is defined by a linear combination of three control points and each control point has weighted influence over a similar sized domain on $s$. The weightings for each control point can be determined given the knot vector.
 
 The knot vector can be obtained by applying the following algorithm, where $N$ is defined as the number of control points.
 \begin{align*}
-K_N &= \left[0, 0,  \frac{n_0 - 3}{N-2}, \frac{n_1 - 3}{N-2}, \cdots ,\frac{n_i - 3}{N-2}, 1, 1\right]\\  
-\textit{s.t. }n_i &\in \left[3, N+1\right]
-\\ N &\geq 3
-\\n_i, N &\in \mathbb{Z}
+K_3 &= \left[0, 0, 0, 1, 1, 1\right]\\  
+K_4 &= \left[0, 0, 0, \frac{1}{2}, 1, 1, 1\right]\\  
+K_5 &= \left[0, 0, 0, \frac{1}{3}, \frac{2}{3}, 1, 1, 1\right]\\
+K_N &= \left[0, 0, 0, \frac{1}{N-2},\frac{2}{N-2} \cdots ,\frac{N-2}{N-2}, 1, 1\right]\\  
+\textit{subject to}\\
+N &\geq 3\\
+N &\in \mathbb{Z}
 \end{align*}
 
-A knot vector for the case when $N = 6$ can be seen in Fig~\ref{fig:nurbsBasis}.
+Note that there are three repeated knots at the beginning and end of a curve. The knot span of these points each has a width of zero, meaning that the curve does not exist inside these spans. These knots make sure that the curve terminates at the location of the first and last control point. They also ensure that the weighting functions have defined values throughout the recursive calculations.
 
-The knot vector can be calculated when one is given the number of control points of a curve. Subsequently we can use the recursive definition of the URBS basis function to calculate the the control point weightings at any given $s \in [0, 1] \therefore s \in [K_3, K_{N+1}]$
+The knot vector can be calculated when one is given the number of control points of a curve. Given the knot vector we can use the recursive definition of URBS basis functions to calculate the the control point weightings for any given $s \in [0, 1]$
 \begin{align*}
-W_{i,d}(s) &=   \frac{s - K_i}{K_{i+d} - K_i}W_{i,d-1}(s)  +  \frac{K_{i + d + 1} - s}{K_{i + d + 1} - K_{i+1}}W_{i+1,d-1}(s)\\
-W_{i,0}(s) &= \begin{cases}
+W_{i}^d(s) &=   \frac{s - K_i}{K_{i+d} - K_i}W_{i}^{d-1}(s)  +  \frac{K_{i + d + 1} - s}{K_{i + d + 1} - K_{i+1}}W_{i+1}^{d-1}(s)\\
+W_{i}^0(s) &= \begin{cases}
    1 & \text{if } K_i \leq s < K_{i+1} \\
    0 & \text{otherwise}
   \end{cases}
@@ -37,13 +42,11 @@ For the cases where the multiplying fractions result in $\frac{0}{0}$, we take t
 
 When the URBS curve is of dimension 2 the line equation for $q_i(s) = q(s)\bigm|_{K_i \leq s < K_{i+1}}$ results in the following definition \cite{website:nurbsExplain};
 \begin{align*}
-q_i(s) = \textbf{N}_i^2W_{i,2}(s) + \textbf{N}_{i-1}^2W_{i-1,2}(s) + \textbf{N}_{i-2}^2W_{i-2,2}(s)
+q_i(s) = \textbf{N}_i^2W_{i}^{2}(s) + \textbf{N}_{i-1}^2W_{i-1}^{2}(s) + \textbf{N}_{i-2}^2W_{i-2}^{2}(s)
 \end{align*}
 Where $\textbf{N}_i^2 = \begin{bmatrix}
 x_i\\y_i
-\end{bmatrix}$ is the $i$th control point and $W_{i,2}(s)$ is the second order basis weighting corresponding to that control point. 
-For details of the derivation of $W_{i,2}(s)$, please see Appendix A.
+\end{bmatrix}$ is the $i$th control point and $W_{i}^{2}(s)$ is the second order basis weighting corresponding to that control point. 
+For details of the derivation and closed form of $W_{i}^{2}(s)$, please see Appendix A.
 
-Given the piecewise form of the line, one can easily take the derivative of $q(s)$ with respect to $s$ and obtain the path velocity $q'(s)$ and path acceleration $q''(s)$ utilising the same control points and knot indexes.
- 
-URBS were used over their better known cousins Non-Uniform Rational Basis Splines (NURBS) due to the even distribution of knots given by URBS ensuring that the optimisation solution we utilised broke the problem into even parts. If knots were allowed to be closer together in sections, it would mean that our solution technique would need to take this into account when dividing up the path space into discrete chunks. Using URBS rather than NURBS mitigates this problem at the cost of requiring more control points to specify curves with finer detail.
+Given the piecewise form of the line, one can easily take the derivative of $\textbf{q}(s)$ with respect to $s$ and obtain the path velocity $\frac{d\textbf{q}(s)}{ds} = \textbf{q}'(s)$ and path acceleration $\frac{d^2\textbf{q}(s)}{ds^2} = \textbf{q}''(s)$. This results in the derivative of $W_{i}^{2}(s)$ with respect to $s$ alongside the same control points and knot indexes, calculating the result in a manner exactly the same as for the position.

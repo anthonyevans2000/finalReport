@@ -6,11 +6,13 @@ Firstly the structure that a spline based representation gives to the input data
 
 This paradigm also allows for easy storage and manipulation of input curves by the GUI program. It also decouples the size and form of the curve from any functions that interact with it, as the curves all have a standard form and all data only represents objects that are of interest. This means that computation interactions were easier to design and were intrinsically flexible to alterations in the makeup of the URBS curves. With an array based method altering something as simple as the relative size of a data set to be printed would create problems and require patches to most of the functions that make up the pathway from data to printing commands.
 
-The restriction of the curves to splines of the 3rd order ensures that the parametrised curve $\textbf{q}(s)$ has the property of being twice differentiable;
+The restriction of the curves to splines of the 3rd order ensures that the parametrised curve has the property of being twice differentiable;
 \begin{align*}
 \textbf{q}(s) \in \mathbb{C}^2
 \end{align*}
-If this were not the case, the path velocity could not be be guaranteed to be continuous. The plant would then require infinite acceleration at those discontinuities in order to travel the path at any speed. 
+Where $\textbf{q}(s)$ represents the position of each axis with respect to a point along the curve.
+If this were not the case, the path velocity could not be be guaranteed to be continuous. The plant would then require infinite acceleration at those discontinuities in order to travel the path at any speed. Thus a 3rd order URBS curve can be guaranteed to be traversable by a system with finite force input without any halt to its movement. Each curve can be swept in a single motion in a continuous manner. This results in fast traversal of the path, allowing the mechanism to complete its tasks in a short amount of time.
 
-Finally the parametrisation of the curve $\textbf{q}(s)$, allows us to easily retrieve the path velocity $\textbf{q}'(s) = \frac{dq(s)}{ds}$ and path acceleration $\textbf{q}''(s) =  \frac{d^2q(s)}{ds^2}$ along any point on the curve. This is useful in calculating the force along an axis required for any given $\dot{s}(t)$
+Finally, the parametrisation of the curve $\textbf{q}(s)$, allows us to easily retrieve the path velocity $\textbf{q}'(s) = \frac{dq(s)}{ds}$ and path acceleration $\textbf{q}''(s) =  \frac{d^2q(s)}{ds^2}$ unambiguously at any point on the curve. This is vital in calculating the forces required for a path traversal at any given $\dot{s}(t)$. The requirements of the path can thus be analysed with a view to perfect traversal accuracy. In comparison, an array based method would have a path velocity which would need to be estimated based on discrete position data. The method used to extract the path velocities would be inherently inaccurate.
 
+The URBS curve has a few limitations in implementation, particularly with complexities involved the creation of a spline to represent a target image. However when a movement command is in a spline format it guarantees properties which result in easy application of optimisation calculations and the overall accuracy of command output.
