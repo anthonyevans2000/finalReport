@@ -36,9 +36,9 @@ Our problem can be simply stated as choosing $\dot{s}(t)$ such that
 \end{align*} 
 This can be stated intuitively as attempting to minimise the time taken for the completion of a specific path without exceeding the torque limitations of a plant.
 
-The problem faced in minimising the time taken is that there are switching points in the trajectory of $s(t)$ which occur when the path velocity $\dot{s}(t)$ needs to decrease in order to be able to clear a section of the curve without breaking the constraints. In order to minimise the time taken to traverse the curve, there are switching points in the trajectory of $s(t)$ when a difficult section of curve is completed. At these points the path velocity should be increasing as much as possible within the bounds of the constraints. This result of maximum acceleration and deceleration is known as 'Bang Bang' control and is typical in the result of time-optimal calculations. This result is intuitive when one considers that the actuators are performing at their limits at all stages of the curve.
+The problem faced in minimising the time taken is that there are points known as switching points in the trajectory of $s(t)$ which occur when the path velocity $\dot{s}(t)$ needs to decrease in order to be able to clear a section of the curve without breaking the constraints. In order to minimise the time taken to traverse the curve, there are switching points in the trajectory of $s(t)$ when a difficult section of curve is completed. At these points the path velocity should be increasing as much as possible within the bounds of the constraints. This result of maximum acceleration and deceleration is known as 'Bang Bang' control and is typical in the result of time-optimal calculations. This result is intuitive when one considers that the actuators are performing at their limits at all stages of the curve.
  
-To find the solution that minimises the completion time these key acceleration and deceleration points need to be identified. The identification of these points gives the positions where the system should begin to accelerate and decelerate along the path.
+To find the solution that minimises the completion time these key acceleration and deceleration switching points need to be identified. The identification of these points gives the positions where the system should begin to accelerate and decelerate along the path.
 In order to find these switching points to obtain the minimum time of traversal a few options are available.
 
 One could attempt to determine the limiting axis at each point on the curve and then determine the optimal points for switching between accelerating and decelerating the path velocity via iterative shooting methods to meet the imposed limitations. This result will give the global optimum for the minimum time of path traversal, given the constraints. A drawback of this problem is that it is a difficult problem to solve.
@@ -47,7 +47,7 @@ Another simpler option is to break the path into discrete segments, calculate th
 
 Once all of the switching points are identified, we can easily calculate the optimal path trajectory $s^*(t)$, from which we can calculate the desired velocities and positions along $x^*(t)$ and $y^	*(t)$ with ease.
 
-Formally, the problem we need to solve can be expressed by;
+Formally, the problem to be solved is expressed by;
 \begin{align*}
 \min_{T, \; s(\cdot)} \;& \int_0^T1dt\\
 \text{subject to} \quad \ddot{\textbf{q}}(t) &= \textbf{q}'(t)\ddot{s}(t) + \textbf{q}''(t)\dot{s}^2(t)\\
