@@ -1,4 +1,4 @@
-\subsection{SeDuMi}
+\subsubsection{SeDuMi}
 
 The discrete optimisation problem is reformulated into a second order cone program, so as to be solved with numerical efficiency. For each segment, the bounds on $b(s)$ and $a(s)$ are defined with respect to the acceleration constraints and with calculation of $\textbf{q}''(s)$ and $\textbf{q}'(s)$. The starting and finishing values of $b(s)$ are anchored to zero. Finally, two solution variables are introduced in order to enable the efficiency of a second order cone program. $c(s)$ is introduced as $\sqrt{b(s)}$ and $d(s)$ is introduced as the increment of the cost integral which now, thanks to the discretisation process is a cost sum- $\frac{1}{c(k\Delta s) + c((k+)\Delta s}$.
 The entire solving functionality was automated and wrapped in a function that could solve the optimal trajectory for a curve  given simply an URBS representation and the torque constraints.

@@ -1,0 +1,62 @@
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}Abstract}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}Project Requirements}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}The University of Melbourne, School of Engineering Requirements}{5}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}NHP Electrical Engineering Products Pty Ltd Requirements}{5}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Project Scope}{6}{section.1.3}
+\contentsline {section}{\numberline {1.4}Performance Indicators}{6}{section.1.4}
+\contentsline {chapter}{\numberline {2}System Design}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Overview}{7}{section.2.1}
+\contentsline {subsubsection}{\numberline {2.1.0.1}User Interface}{7}{subsubsection.2.1.0.1}
+\contentsline {subsubsection}{\numberline {2.1.0.2}Image Processing}{8}{subsubsection.2.1.0.2}
+\contentsline {subsubsection}{\numberline {2.1.0.3}URBS Curve}{8}{subsubsection.2.1.0.3}
+\contentsline {subsubsection}{\numberline {2.1.0.4}Optimisation}{9}{subsubsection.2.1.0.4}
+\contentsline {subsubsection}{\numberline {2.1.0.5}Server}{9}{subsubsection.2.1.0.5}
+\contentsline {subsubsection}{\numberline {2.1.0.6}Client}{10}{subsubsection.2.1.0.6}
+\contentsline {subsubsection}{\numberline {2.1.0.7}PLC State Machine}{10}{subsubsection.2.1.0.7}
+\contentsline {subsubsection}{\numberline {2.1.0.8}Motor Drivers}{10}{subsubsection.2.1.0.8}
+\contentsline {section}{\numberline {2.2}Uniform Rational Basis Splines}{10}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Introduction to URBS}{10}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Design Rationale}{11}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}URBS Analysis}{12}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Control System}{14}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Open Loop Control}{14}{subsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.1.1}Stepper Motors and Open Loop Justification}{15}{subsubsection.2.3.1.1}
+\contentsline {subsection}{\numberline {2.3.2}Optimisation}{16}{subsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.2.1}Path Velocity Optimisation}{16}{subsubsection.2.3.2.1}
+\contentsline {subsubsection}{\numberline {2.3.2.2}Pontryagin's Maximum Principle}{18}{subsubsection.2.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3.2.3}Convex Optimisation Approach}{18}{subsubsection.2.3.2.3}
+\contentsline {subsubsection}{\numberline {2.3.2.4}SeDuMi}{20}{subsubsection.2.3.2.4}
+\contentsline {subsubsection}{\numberline {2.3.2.5}Results}{20}{subsubsection.2.3.2.5}
+\contentsline {section}{\numberline {2.4}Image Interpolation}{25}{section.2.4}
+\contentsline {chapter}{\numberline {3}Implementation}{26}{chapter.3}
+\contentsline {section}{\numberline {3.1}CNC Machine}{26}{section.3.1}
+\contentsline {section}{\numberline {3.2}Mechanical}{26}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Frame}{26}{subsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Motors}{26}{subsubsection.3.2.1.1}
+\contentsline {subsubsection}{\numberline {3.2.1.2}Limit Switches}{26}{subsubsection.3.2.1.2}
+\contentsline {subsection}{\numberline {3.2.2}Drawing Head - Z-axis}{26}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Electrical and Wiring}{26}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Connectors and Loom}{27}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Voltage Dividers}{27}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Solenoid Driver}{27}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Kill Switch}{28}{subsection.3.3.4}
+\contentsline {section}{\numberline {3.4}PLC Control Software}{30}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Introduction to Programmable Logic Controllers}{30}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}PLC Architecture}{30}{subsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.2.1}Programs}{30}{subsubsection.3.4.2.1}
+\contentsline {subsubsection}{\numberline {3.4.2.2}Intraprogram Interfaces and Global Data}{31}{subsubsection.3.4.2.2}
+\contentsline {subsection}{\numberline {3.4.3}Governor}{32}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Communications}{33}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}motorControl}{34}{subsection.3.4.5}
+\contentsline {subsubsection}{\numberline {3.4.5.1}Introduction to the AMCI 3401 Stepper Module}{34}{subsubsection.3.4.5.1}
+\contentsline {subsubsection}{\numberline {3.4.5.2}Stepper Motor Direction Management}{36}{subsubsection.3.4.5.2}
+\contentsline {subsection}{\numberline {3.4.6}checkLimitSwitch}{37}{subsection.3.4.6}
+\contentsline {section}{\numberline {3.5}User Interface}{37}{section.3.5}
+\contentsline {section}{\numberline {3.6}Java Program}{37}{section.3.6}
+\contentsline {section}{\numberline {3.7}MATLAB\textsuperscript {\textregistered } Image Processing}{37}{section.3.7}
+\contentsline {chapter}{\numberline {4}Performance and Testing}{38}{chapter.4}
+\contentsline {chapter}{Appendices}{39}{section*.14}
+\contentsline {chapter}{\numberline {A}URBS Weight Derivation}{40}{Appendix.1.A}
+\contentsline {chapter}{\numberline {B}Derivation of $s^*(t)$ given $s^*(s)$}{42}{Appendix.1.B}
+\contentsline {chapter}{References}{43}{chapter*.15}

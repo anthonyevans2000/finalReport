@@ -1,4 +1,4 @@
-\subsection{Open Loop Control System}
+\subsection{Open Loop Control}
 	The DoodleBot uses two stepper motors in open loop to control the position and movement of the drawing head (open loop justification in Section~\ref{sec:control-stepper}). The input to the system is the frequency of voltage pulses and the output is the velocity of the drawing head. 
 	
 	Both the input and output operate in 'step' units (see Section~\ref*{sec:implementation-mechanical} for more detail on what this unit is in the real system).
@@ -7,14 +7,15 @@
 	
 	\subsubsection{Stepper Motors and Open Loop Justification}
 		\label{sec:control-stepper}
+			
+		Stepper Motors are brushless DC motors and are used as the primary drivers for X and Y movement in the DoodleBot. Where a standard DC motor creates an output torque proportional to input current, a stepper motor rotates at a speed that matches the frequency of input voltage steps.
+		
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=0.8\textwidth]{figures/optimisation/steppermotor}
 			\caption{Operation of a simplified stepper motor over four steps}
 			\label{fig:stepper}
 		\end{figure}
-			
-		Stepper Motors are brushless DC motors and are used as the primary drivers for X and Y movement in the DoodleBot. Where a standard DC motor creates an output torque proportional to input current, a stepper motor rotates at a speed that matches the frequency of input voltage steps.
 		
 		As shown in Figure~\ref{fig:stepper}, stepper motors consist of several electromagnets arranged in a equally spaced pattern around a gear-shaped rotor. Each electromagnet is shaped to have its own teeth that can align with the rotor's teeth. 
 		

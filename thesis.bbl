@@ -1,0 +1,72 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Altmann(1995)]{website:nurbsExplain}
+Markus Altmann.
+\newblock About nonuniform rational b-splines - nurbs, 1995.
+\newblock URL \url{http://web.cs.wpi.edu/~matt/courses/cs563/talks/nurbs.htmf}.
+
+\bibitem[Bardine et~al.(2010)Bardine, Campanelli, Foglia, and Prete]{Bardine10}
+A.~Bardine, S.~Campanelli, P.~Foglia, and C.A. Prete.
+\newblock Nurbs interpolator with confined chord error and tangential and
+  centripetal acceleration control.
+\newblock In \emph{Ultra Modern Telecommunications and Control Systems and
+  Workshops (ICUMT), 2010 International Congress on}, pages 489--496, 2010.
+\newblock \doi{10.1109/ICUMT.2010.5676592}.
+
+\bibitem[Chen and Wu(2007)]{Chen07}
+Shyh-Leh Chen and Kai-Chiang Wu.
+\newblock Contouring control of smooth paths for multiaxis motion systems based
+  on equivalent errors.
+\newblock \emph{Control Systems Technology, IEEE Transactions on}, 15\penalty0
+  (6):\penalty0 1151--1158, 2007.
+\newblock ISSN 1063-6536.
+\newblock \doi{10.1109/TCST.2007.899719}.
+
+\bibitem[Choi et~al.(2001)Choi, Kim, Kim, and Ha]{Choi01}
+Dong-Soo Choi, Seung-Jean Kim, Yang-O Kim, and In-Joong Ha.
+\newblock A computationally efficient approach to time-optimal control of
+  robotic manipulators along specified paths.
+\newblock In \emph{Industrial Electronics, 2001. Proceedings. ISIE 2001. IEEE
+  International Symposium on}, volume~3, pages 1569--1574 vol.3, 2001.
+\newblock \doi{10.1109/ISIE.2001.931940}.
+
+\bibitem[Foretnik(2012)]{website:nurbsDemo}
+Jan Foretnik.
+\newblock Nurbs demo, 2012.
+\newblock URL \url{http://geometrie.foretnik.net/files/NURBS-en.swf}.
+
+\bibitem[Tseng et~al.(2009)Tseng, Lin, Lai, and Ueng]{Tseng09}
+Sheng‐Jung Tseng, Kuan‐Yuan Lin, Jiing‐Yih Lai, and Wen‐Der Ueng.
+\newblock A nurbs curve interpolator with jerk‐limited trajectory planning.
+\newblock \emph{Journal of the Chinese Institute of Engineers}, 32\penalty0
+  (2):\penalty0 215--228, 2009.
+\newblock \doi{10.1080/02533839.2009.9671498}.
+\newblock URL
+  \url{http://www.tandfonline.com/doi/abs/10.1080/02533839.2009.9671498}.
+
+\bibitem[Verscheure et~al.(2009)Verscheure, Demeulenaere, Swevers, De~Schutter,
+  and Diehl]{Schutter09}
+D.~Verscheure, B.~Demeulenaere, J.~Swevers, J.~De~Schutter, and M.~Diehl.
+\newblock Time-optimal path tracking for robots: A convex optimization
+  approach.
+\newblock \emph{Automatic Control, IEEE Transactions on}, 54\penalty0
+  (10):\penalty0 2318--2327, 2009.
+\newblock ISSN 0018-9286.
+\newblock \doi{10.1109/TAC.2009.2028959}.
+
+\bibitem[Yeh and Hsu(1999)]{Yeh99}
+S.-S. Yeh and P.-L. Hsu.
+\newblock The speed-controlled interpolator for machining parametric curves.
+\newblock \emph{Computer-Aided Design}, 31\penalty0 (5):\penalty0 349 -- 357,
+  1999.
+\newblock ISSN 0010-4485.
+\newblock \doi{http://dx.doi.org/10.1016/S0010-4485(99)00035-4}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0010448599000354}.
+
+\end{thebibliography}

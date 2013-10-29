@@ -1,4 +1,4 @@
-\subsection{Path Velocity Optimisation}
+\subsubsection{Path Velocity Optimisation}
 A machine that follows prescribed paths has an inherent trade-off between obeying the physical restrictions of the device and following a path at the fastest possible speed. There is a wealth of information surrounding the topic of the optimisation of such physical systems, seen in \cite{Bardine10},  \cite{Chen07}, \cite{Choi01}, \cite{Tseng09}, \cite{Schutter09} and \cite{Yeh99}. Each study was relevant to the optimisation that we had in mind, but used differing strategies and overcame different limitations to achieve a trajectory that minimised some particular cost. The method that we decided was the most relevant to our problem and was the process that we ended up implementing was covered in \cite{Schutter09}. A comparison of the different optimisation strategies is instructive and can be seen in Appendix B.
 
 The physics model we chose to construct the limitations of our plant was a pair of double integrators. Given that we can determine the limits on $\ddot{\textbf{q}}(t)  = \begin{bmatrix}
