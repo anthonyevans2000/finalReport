@@ -24,11 +24,10 @@
 \contentsline {subsection}{\numberline {2.3.2}Stepper Motors and Open Loop Justification}{15}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}Optimization}{16}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Path Velocity Optimisation}{16}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Pontryagin's Maximum Principle}{18}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Convex Optimisation Approach}{18}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}Discretisation of Path}{19}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}SeDuMi}{20}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Results}{20}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.2}Convex Optimisation Approach}{18}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Discretisation of Path}{19}{subsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.3.1}SeDuMi}{20}{subsubsection.2.4.3.1}
+\contentsline {subsection}{\numberline {2.4.4}Results}{21}{subsection.2.4.4}
 \contentsline {section}{\numberline {2.5}Image Interpolation}{25}{section.2.5}
 \contentsline {chapter}{\numberline {3}Implementation}{26}{chapter.3}
 \contentsline {section}{\numberline {3.1}CNC Machine}{26}{section.3.1}
