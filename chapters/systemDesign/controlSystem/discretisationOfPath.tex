@@ -1,0 +1,7 @@
+\subsection{Discretisation of Path}
+
+The results of this alteration to our problem are far reaching. Firstly, it can be seen that our problem is now linear in its constraints. This results in our viable solution space taking up a contiguous range, meaning that for the solver no isolated solutions are unreachable.
+Secondly, the cost integral that integrates over the trajectory $s$ is convex in the solution variable $b(s)$, so that a solver will always be able to determine the correct direction to move the state such that it converges to the local optimum.
+With the combination of these two properties, it can be seen that a solver can be employed to correctly solve for the optimal trajectory $\dot{s}^*(s)$, through the solution of $b^*(s)$
+
+In order to form a discrete problem that a computer can iterate over and solve, the path is discretised and the trajectory is solved over each path segment. As the control input, $a(s)$ is given as being piecewise constant for each discrete segment of $s$. Thus, as it is finite and constrained by the system constraints. $\sqrt{b(s)}$ is piecewise linear and continuous, meaning $b(s)$ is piecewise non-linear and continuous. 

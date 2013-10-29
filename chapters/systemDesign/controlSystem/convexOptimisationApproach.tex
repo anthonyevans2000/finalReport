@@ -1,4 +1,4 @@
-\subsubsection{Convex Optimisation Approach}
+\subsection{Convex Optimisation Approach}
 The method used to solve the problem involved breaking the curve down into a discrete number of sections and solving the continuous problem in a piecewise manner, which allows us to more easily take into consideration the restrictions imposed.
 
 The problem is now to apply a numerical solving method in order to find the approximated optimum. Using the technique outlined in \cite{Schutter09}, the problem was reformulated such that the non-linear constraint $\ddot{\textbf{q}}(t) = \textbf{q}'(t)\ddot{s}(t) + \textbf{q}''(t)\dot{s}^2(t)$ becomes linear for the solution variables, whilst the cost function remains convex. Enforcing linearity in the solution variables allows for the solution to be found by efficient solvers, as well as ensuring that a solver will not be able to get caught in a local minima.
@@ -14,8 +14,8 @@ Such that the non-linear constraint becomes
 Note that the time dependence of the path parametrisation is neglected. This is because cost function is reformulated with a change of variables such that its dependence on $t$ is replaced by a dependence on $s$. Thus the solution that minimises the cost function will minimise the time taken implicitly without direct reference to time as shown here;
 
 \begin{align*}
-J(T) = \int_0^T1\;dt\\
-J(s(\cdot)) = \int_{s(0)}^{s(T)} \frac{1}{\dot{s}}ds\\
+J(T) &= \int_0^T1\;dt\\
+J(s(\cdot)) &= \int_{s(0)}^{s(T)} \frac{1}{\dot{s}}ds\\
 	&= \int_0^1\frac{1}{\dot{s}}ds
 \end{align*}
 
@@ -24,10 +24,4 @@ The cost function is trying to minimise the inverse of $\dot{s}(t)$, which is th
 J(s(\cdot)) = \int_0^1\frac{1}{\sqrt{b(s)}}ds
 \end{align*}
 
-The change of variables gives us a cost that remains convex
-
-The results of this alteration to our problem are far reaching. Firstly, it can be seen that our problem is now linear in its constraints. This results in our viable solution space taking up a contiguous range, meaning that for the solver no isolated solutions are unreachable.
-Secondly, the cost integral that integrates over the trajectory $s$ is convex in the solution variable $b(s)$, so that a solver will always be able to determine the correct direction to move the state such that it converges to the local optimum.
-With the combination of these two properties, it can be seen that a solver can be employed to correctly solve for the optimal trajectory $\dot{s}^*(s)$, through the solution of $b^*(s)$
-
-In order to form a discrete problem that a computer can iterate over and solve, the path is discretised and the trajectory is solved over each path segment. As the control input, $a(s)$ is given as being piecewise constant for each discrete segment of $s$. Thus, as it is finite and constrained by the system constraints. $\sqrt{b(s)}$ is piecewise linear and continuous, meaning $b(s)$ is piecewise non-linear and continuous. 
+The change of variables gives us a cost that remains convex and is in terms of one of the solution variables.
