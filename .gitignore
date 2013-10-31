@@ -1,0 +1,14 @@
+thesis.pdf
+thesis.aux
+thesis.log
+thesis.aux
+thesis.out
+thesis.pdfsync
+thesis.synctex.gz
+thesis.toc
+appendices/appendixA.aux
+appendices/appendixC.aux
+chapters/implementation/implementation.aux
+chapters/introduction/introduction.aux
+chapters/performance/performance.aux
+chapters/systemDesign/systemDesign.aux
