@@ -89,7 +89,7 @@
 \RequirePackage{mathspec}
 
 % use Arno Pro instead of standard LaTeX fonts
-\setmathsfont(Digits,Latin,Greek)[Numbers={OldStyle,Proportional}]{Arno Pro}
+\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{Arno Pro}
 \setmathrm{Arno Pro}
 
 \RequirePackage{fontspec,xltxtra,xunicode}

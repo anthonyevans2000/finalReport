@@ -2,8 +2,9 @@
 The Java code is the backbone that interfaces between the separate modules of the host system. These modules are the Graphical User Inferface (GUI), the MATLAB\textsuperscript{\textregistered} optimisation, the MATLAB\textsuperscript{\textregistered} image processing and the profile server. Each module has a separate program class and thread. The result of the class interactions generates a desired sequence of velocity profiles to be enacted by the CNC machine. A thread is a term used to describe a linear process happening in parallel with multiple other processes. The general outlay of the components of the system can be seen in Figure\ref{fig:javaOverview}
 
 
-\begin{figure}[htbp]  
-\includegraphics[width=\textwidth]{figures/implementation/humanMachineInterface/systemDiagram.png}
+\begin{figure}[htbp] 
+\centering
+\includegraphics[width=0.6\textwidth]{figures/implementation/humanMachineInterface/systemDiagram2.png}
 \caption[Human Machine Interface System Diagram]{This diagram demonstrates the interconnection of the components of the computer program that enables the user to interface with the DoodleBot. The components in BLUE represent Java modules. The component in RED represents the MATLAB\textsuperscript{\textregistered} interface.
 \label{fig:javaOverview}}
 \end{figure}

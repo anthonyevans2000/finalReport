@@ -1,31 +1,34 @@
 \section{PLC Control Software}
 
 \subsection{Introduction to Programmable Logic Controllers}
-
+	A programmable logic controller (PLC) are computers designed for control and automation tasks. 
 \subsection{PLC Architecture}
 
-	\begin{figure}[htbp!]
-		\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{figures/cncMachine/PLC_architecture}}
-		\caption{The program and I/O architecture of the PLC}
+\begin{landscape}
+		\vspace*{\fill}
+		\includegraphics[width=\hsize]{figures/cncMachine/PLC_architecture}
+		\captionof{figure}{The program and I/O architecture of the PLC}
 		\label{fig:PLCarchitecture}
-	\end{figure}
+		\vspace*{\fill}
+\end{landscape}
+
 
 	\subsubsection{Programs}
 		The programmable logic controller features four programs, shown visually in ~\ref{fig:PLCarchitecture}
 	
 		\begin{description}
 			\item[Governor] \hfill \\
-				The Governor is a  state machine that sets the overall state of the DoodleBot controller and controls Communications and motorControl.
+				The Governor state machine sets the overall state of the DoodleBot controller by interfacing with Communications and motorControl.
 			\item[Communications] \hfill \\
 				The Communications state machine is in charge of managing the UDP socket interface, all network communications and the populating of the command list.
 			\item[motorControl] \hfill \\
-				The motorControl state machine handles all stepper motor control.
+				The motorControl state machine handles all stepper motor control and receives information from the checkLimitSwitch program.
 			\item[checkLimitSwitch] \hfill \\
-				The checkLimitSwitch program periodically monitors the limit switch input and triggers an emergency stop if the switches are triggered when not expected at a period of 10ms.
+				The checkLimitSwitch program periodically monitors the limit switch input and triggers an emergency stop if the switches are triggered. It runs every 10ms.
 		\end{description}
 		
 		\subsubsection{Intraprogram Interfaces and Global Data}
-		The Governor program interfaces with the Communications and motorControl programs via the two global scoped variables, \textit{motorControl\_mode} and \textit{communications\_mode} which act as intraprogram interfaces. On each state transition, the Governor sets these variables  to certain values, determining what state to move the other programs into. The other programs can then set these variables to different values, informing the Governor on their own state changes and status which the Governor then uses as state transition conditions. Table ~\ref{table:progaminterfaces} shows the possible values of the intraprogram interfaces. 
+		The Governor program interfaces with the Communications and motorControl programs via the two global scope variables, \textit{motorControl\_mode} and \textit{communications\_mode} which act as intraprogram interfaces. On each state transition, the Governor sets these variables  to certain values, determining what state to move the other programs into. The other programs can then set these variables to different values, informing the Governor on their own state changes and status which the Governor then uses as state transition conditions. Table ~\ref{table:progaminterfaces} shows the possible values of the intraprogram interfaces. 
 		
 		\begin{table}[htbp!]
 			\begin{tabular}{|c|l|l|l|}
@@ -58,8 +61,6 @@
 					& .type & Determines the command type. 0 is a 'draw' and 1 is a 'move'. \\ \cline{2-3}
 					& .x\_speed & For 'draw' operations, determines the X target speed for this sample. For 'move' operations, determines the target position for X to move to. \\ \cline{2-3}
 					& .y\_speed & For 'draw' operations, determines the Y target speed for this sample. For 'move' operations, determines the target position for Y to move to. \\ \hline
-				BUFFER\_SIZE & CONSTANT & Size of the command buffer \\ \hline
-				PC\_IP & CONSTANT & IPv4 address of the PC producing the command list \\ \hline
 				\multirow{8}{*}{boundaries} & .X\_CW & The number of clockwise steps from the center until the boundary in the X positive direction\\ \cline{2-3}
 					 & .X\_CCW & The number of clockwise steps from the center until the boundary in the X negative direction\\\cline{2-3}
 					 & .Y\_CW & The number of clockwise steps from the center until the boundary in the Y negative direction\\ \cline{2-3}
@@ -71,7 +72,7 @@
 					 & .move\_speed\_x & Target speed for 'move' operations in the X axis\\ \cline{2-3}
 					 & .move\_speed\_y & Target speed for 'move' operations in the Y axis\\ \hline
 			\end{tabular}
-			\captionof{table}{Global scope variables used by multiple programs}
+			\captionof{table}{Important global scope variables used by multiple programs}
 			\label{table:globalvariables}
 		\end{center}
 
@@ -97,65 +98,21 @@
 \subsection{Communications}
 	
 	The communications program has the role of communicating with the PC to populate the commandBuffer with the output of the PCs optimization stage. Figure ~\ref{fig:communicationsStates} shows the operation of the program.
-	\begin{center}
-		\includegraphics[width=\textwidth]{figures/cncMachine/communications}
-		\captionof{figure}{Communications program: States and State Actions}
-		\label{fig:communicationsStates}
-	\end{center}
+
 \subsection{motorControl}
-
-	\begin{figure}[htb!]
-		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=\textwidth]{figures/cncMachine/motorControl}}
-		\caption{motorControl Program: States and State Actions}
-		\label{fig:motorControlStates}
-	\end{figure}
-
-	\subsubsection{Introduction to the AMCI 3401 Stepper Module}
-			The main purpose of the motorControl program is to communicate with the two AMCI 3401 Stepper Motor Modules. Their primary role is to send two types of control signals to the stepper motor modules:\\
-			\begin{description}
-				\item[Step Output] \hfill \\
-					A $5V$ square pulse output, with each rising edge signifying a single step of the motor.
-				\item[Direction Output] \hfill \\
-					A $5V$ boolean output that defines which direction the stepper motors should turn.
-			\end{description}
-			The modules takes its input by asynchronously monitoring a 16-byte command word on the PLC and mirror it internally. All commands given by the motorControl program involving modifying this command word. \\
-			In addition, the module monitors its relative position and operating state by providing a 16-byte status word.\\
-			The modules feature a broad range of commands, but the those used by the DoodleBot system are:
-			\begin{description}
-				\item[Absolute Move] \hfill \\
-					Given a position in space (relative to the preset origin position), the AMCI module creates the appropriate velocity profile to get there (within the acceleration/deceleration/top speed parameter limits).
-				\item[Relative Move] \hfill \\
-					Given a distance to travel (from the current position), the AMCI module creates the appropriate velocity profile to get there (within the acceleration/deceleration/top speed parameter limits).
-				\item[Manual Move] \hfill \\
-					Manual type moves are actually classified as two separate commands defining the direction of the move  - manual move clockwise, and manual move counterclockwise. These moves accelerate to the programmed speed at the acceleration rate and travel until stopped. While moving in this state, the programmed speed can be changed without having to stop and restart.
-				\item[Immediate Stop] \hfill \\
-					An immediate stop command stops all current motion.
-				\item[Preset Current Position] \hfill \\
-					Sets the internal position memory of the module to a position defined in the command word.
-			\end{description}
-		\subsubsection{Stepper Motor Direction Management}
-
-	\begin{figure}[htbp!]
-		\includegraphics[width=\textwidth]{figures/cncMachine/position_direction}
-		\caption{The two routines for managing direction and position}
-		\label{fig:Direction and Positional Tracking}
-	\end{figure}
 	
-			Empirical observation of the AMCI 3401 modules in operation showed a significant delay (in the order of 2-3 seconds) in between distinct commands. This delay is also present when switching between the Manual Move Clockwise and the Manual Move Counterclockwise states. In comparison, changing the programmed speed while in each state has negligible delay.\\
+	The motorControl Program's purpose is to control the electromechanical hardware via the AMCI 3401 Stepper Motor Modules and the PLC Embedded I/O. 
+	
+	Please see Appendix ~\ref{sec:PLC-flowcharts-motor} for more detail on how the motorControl Program functions and how the AMCI 3401 module works. A detailed flowchart of this program can be found in Figure ~\ref{fig:motorControlStates}.
+
+	\subsubsection{Stepper Motor Direction Management}	
+			Empirical observation of the AMCI 3401 modules in operation showed a significant delay (in the order of 2-3 seconds) between distinct commands. This delay was also present when switching between the Manual Move Clockwise and the Manual Move Counterclockwise commands. In contrast, changing the programmed speed while in either manual move state had negligible delay.
 			
-			This behaviour is significant since the optimized velocity profiles require both axes to track the commands within the period of sampling (ideally set to 40-150ms for good results) to follow the required path.\\
+			This behaviour was a significant issue since the optimized velocity profiles require both axes to track the commands within the period of sampling (in the order of 30-150ms) to follow the required path and as such a 2-3 second delay would prevent proper operation.
 			
-			To overcome this problem, the DoodleBot system controls the direction output via the PLC embedded DC output pins 0 and 1, and set manually through the motorControl program. To continue using Absolute Moves, this requires extra software functionality to keep track of the current position.
+			To overcome this problem, the DoodleBot controls the direction output via the PLC embedded DC output pins 0 and 1. Direction control is hence done  through code in the motorControl program rather than allow the AMCI 3401 modules to handle the task. To continue using Absolute Moves, this required extra code to keep track of the current position.
 			
-			\begin{description}
-				\item[Absolute Move, Relative Move] \hfill \\
-					Relative Moves are treated by the rest of the code as usual. Absolute Moves must be preceded by a Preset Current Position command with the position set to x\_pos and y\_pos. <blah> function monitors the directional state of the AMCI 3401 modules and mirrors this onto the direction output pins. <gah> function measures the change in position since last scan and adds this to x\_pos and y\_pos.
-				\item[Manual Move] \hfill \\
-					All manual moves, whether clockwise or anticlockwise, are sent to the AMCI 3401 modules as Manual Move Clockwise at the correct speed. The x\_direction and y\_direction bits need to be explicitly set with each Manual Move command to operate in the required direction. Since the AMCI 3401 module thinks it is always moving clockwise (even when it's not), it's internal position state is no longer correct. Function <gah> measures the change in position since last scan and depending on the direction of movement, adds or subtracts this value to x\_pos and y\_pos.
-				\item[Preset Current Position] \hfill \\
-					Change the value of x\_pos and y\_pos to mirror the position state in the AMCI 3401 controller.
-			\end{description}
+			Please see Appendix ~\ref{sec:PLC-flowcharts-pos} for more detail on how this part of the code works. A flowchart of this code can be found in Figure ~\ref{fig:Direction and Positional Tracking}.
 			
 
 \subsection{checkLimitSwitch}

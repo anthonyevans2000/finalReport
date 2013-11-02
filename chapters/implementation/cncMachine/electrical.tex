@@ -1,6 +1,14 @@
 \section{Electrical and Wiring}
 
-	The wiring diagram on the following page(Figure ~\ref{fig:WiringDiagram}) shows electrical layout of the system. The DoodleBot has two major groups of components - the electronics and control components sit in the DoodleBot Control Enclosure and the electromechanical components are mounted to the DoodleBot CNC Frame - that are interfaced by a 12-wire loom and a 2-wire loom broken by two connectors.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\textwidth]{figures/cncMachine/control.jpg}
+		\caption{DoodleBot Control Enclosure}
+		\label{fig:control}
+	\end{figure}
+	
+	The wiring diagram on the following page(Figure ~\ref{fig:WiringDiagram}) shows electrical layout of the system. The DoodleBot has two major groups of components - the electronics and control components sit in the DoodleBot Control Enclosure (Figure ~\ref{fig:control}) and the electromechanical components are mounted to the DoodleBot CNC Frame (Figure ~\ref{fig:implementation-mechanical}).
+
 	
 \begin{landscape}
 		\vspace*{\fill}
@@ -12,29 +20,37 @@
 
 
 	\subsection{Connectors and Loom}
-		<PHOTO OF CONNECTOR ENDS>
+	
+	The DoodleBot team constructed a 14-wire loom to transmit power and signals between the Control Enclosure and the CNC Frame. Figure ~\ref{fig:loom} shows the plastic connector pin outs and Table ~\ref{table:loom} lists the details of each wire/pin in the loom.
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\textwidth]{figures/cncmachine/loom.jpg}
+			\caption{Wiring Loom Connector Pin out}
+			\label{fig:loom}
+		\end{figure}
+		
 		\begin{table}[h]
 			\centering
-			\begin{tabular}{cccc}
+			\begin{tabular}{|c|c|c|l|l|}
 				\hline
-				\emph{Pin} & \emph{Wire Colour} & \emph{Source} & \emph{Machine Side} \\ \hline
-				1 & Red & & \\ \hline
-				2 & Red & &\\ \hline
-				3 & Red & &\\ \hline
-				4 & Red & &\\ \hline
-				5 & Red & &\\ \hline
-				6 & Red & &\\ \hline
-				7 & Red & &\\ \hline
-				8 & Red & &\\ \hline
-				9 & Red & &\\ \hline
-				10 & Red & &\\ \hline
-				11 & Red & &\\ \hline
-				12 & Red & &\\ \hline
-				13 & Red & &\\ \hline
-				14 & Red & &\\ \hline
-				15 & Red & &\\ \hline
-				16 & Red & &\\ \hline
+				\emph{Pin} & \emph{Wire Colour} & Voltage & \emph{Control Enclosure Side} & \emph{CNC Frame Side} \\ \hline
+				1 & Red & 24V & Power & \parbox[t]{6cm}{SMD23 +PWR [X] \\ Limit Switch [X\_CW],[X\_CCW]} \\ \hline
+				2 & Red/Yellow & 5.1V & PLC DC Output 0 & SMD23 +Direction [X]\\ \hline
+				3 & Red & 5V &  3401 Step Output [0] & SMD23 +Step [X]\\ \hline
+				4 & Black & 0V & GND & SMD23 -PWR, -Direction, -Step [X] \\ \hline
+				5 & Red/Yellow & 24V & Power & \parbox[t]{6cm}{SMD23 +PWR [Y]\\ Limit Switch [Y\_CW],[Y\_CCW]}\\ \hline
+				6 & Black/Yellow & 5.1V & PLC DC Output 1 & Stepper Motor Direction [Y]\\ \hline
+				7 & Black & 5V &  3401 Step Output [1] & SMD23 +Step [Y]\\ \hline
+				8 & Black/Yellow & 0V & GND & SMD23 -PWR, -Direction, -Step [Y] \\ \hline
+				9 & Black & 24V & PLC DC Input 0 & Limit Switch [X\_CW]\\ \hline
+				10 & Black/Yellow & 24V & PLC DC Input 1 & Limit Switch [X\_CCW]\\ \hline
+				11 & Red & 24V & PLC DC Input 2 & Limit Switch [Y\_CW]\\ \hline
+				12 & Red/Yellow & 24V & PLC DC Input 3 & Limit Switch [Y\_CCW]\\ \hline
+				13 & Red/Yellow & 12V & +Solenoid Driver Output & +Solenoid [Z]\\ \hline
+				14 & Black & 0V & -Solenoid Driver Output & -Solenoid[Z]\\ \hline
 			\end{tabular}
+			\caption{Wiring loom and connector specifications}
+			\label{table:loom}
 		\end{table}
 	\subsection{Voltage Dividers}
 		The direction signals for the stepper motors are produced from the PLC on pins $embedded.DCout.0$ and $embedded.DCout.1$ at $24V$. The AMCI SMD23 only accepts a differential input of $5V$.
