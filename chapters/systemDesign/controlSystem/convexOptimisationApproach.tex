@@ -1,4 +1,4 @@
-\subsection{Convex Optimisation Approach}
+\subsection{Linear and Convex Optimisation Approach}
 The method used to solve the problem involved breaking the curve down into a discrete number of sections and solving the continuous problem in a piecewise manner, which allows us to more easily take into consideration the restrictions imposed.
 
 The problem is now to apply a numerical solving method in order to find the approximated optimum. Using the technique outlined in \cite{Schutter09}, the problem was reformulated such that the non-linear constraint $\ddot{\textbf{q}}(t) = \textbf{q}'(t)\ddot{s}(t) + \textbf{q}''(t)\dot{s}^2(t)$ becomes linear for the solution variables, whilst the cost function remains convex. Enforcing linearity in the solution variables allows for the solution to be found by efficient solvers, as well as ensuring that a solver will not be able to get caught in a local minima.
@@ -11,7 +11,7 @@ Such that the non-linear constraint becomes
 \begin{align*}
 \ddot{\textbf{q}}(s) = \textbf{q}'(s)a(s) + \textbf{q}''(s)b(s)
 \end{align*}
-Note that the time dependence of the path parametrisation is neglected. This is because cost function is reformulated with a change of variables such that its dependence on $t$ is replaced by a dependence on $s$. Thus the solution that minimises the cost function will minimise the time taken implicitly without direct reference to time as shown here;
+Note that the time dependence of the path parametrisation is neglected. This is because the cost function is reformulated with a change of variables such that its dependence on $t$ is replaced by a dependence on $s$. Thus the solution that minimises the cost function will minimise the time taken implicitly without direct reference to time as shown here;
 
 \begin{align*}
 J(T) &= \int_0^T1\;dt\\

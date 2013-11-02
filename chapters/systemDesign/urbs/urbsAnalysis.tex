@@ -1,11 +1,11 @@
-\subsection{URBS Analysis}
+\subsection{Uniform Rational Basis Spline Analysis}
 Given their benefits, 3rd order URBS were used as the curve data structure for the DoodleBot. 
 
 The general weighting structure of an URBS is the same for each and every curve, given the uniformity of their knots. This means that we can easily calculate the basis functions for an URBS given only the number of control points. Thus an URBS curve is completely defined by the number and location of its control points.
 
 A knot vector is a set of numbers which define the locations of all of the knots that a curve contains. An URBS contains only evenly spaced knots. The knot vector defines the knot spans of a curve. Over each span, only three control points will have non-zero weighting. At the end of each span, one control point's weighting goes to zero and is substituted by another control point, whose weighting begins from zero also. The numeric values of the knots within the vector are unimportant; the curve parametrising variable $s$ starts from the first knot and ends at the last and all knots are evenly spaced. We have arbitrarily defined the knots such that all lie between zero and one.
 
-The knot vector defines weighting coefficients for each of the control points. The values of these weights quadratically shifts across the domain of $s \in [0, 1]$. This brings consecutive control points into prominence evenly as the path parameter is traversed. Each point on the curve consists of a linear combination of the control points that are non-zero for the knot span. This is demonstrated in the following equation
+The knot vector defines weighting coefficients for each of the control points. The values of these weights quadratically shifts across the domain of $s \in [0, 1]$. This brings consecutive control points into prominence evenly as the path parameter is traversed. Each point on the curve consists of a linear combination of the control points that are non-zero within the knot span. This is demonstrated in the following equation
 \begin{align*}
 q_i(s) = w_i\textbf{N}_i^2 + w_{i-1}\textbf{N}_{i-1}^2 + w_{i-2}\textbf{N}_{i-2}^2
 \end{align*} 
@@ -49,4 +49,4 @@ x_i\\y_i
 \end{bmatrix}$ is the $i$th control point and $W_{i}^{2}(s)$ is the second order basis weighting corresponding to that control point. 
 For details of the derivation and closed form of $W_{i}^{2}(s)$, please see Appendix A.
 
-Given the piecewise form of the line, one can easily take the derivative of $\textbf{q}(s)$ with respect to $s$ and obtain the path velocity $\frac{d\textbf{q}(s)}{ds} = \textbf{q}'(s)$ and path acceleration $\frac{d^2\textbf{q}(s)}{ds^2} = \textbf{q}''(s)$. This results in the derivative of $W_{i}^{2}(s)$ with respect to $s$ alongside the same control points and knot indexes, calculating the result in a manner exactly the same as for the position.
+Given the piecewise form of the line, one can easily take the derivative of $\textbf{q}(s)$ with respect to $s$ and obtain the derivatives $\frac{d\textbf{q}(s)}{ds} = \textbf{q}'(s)$ and $\frac{d^2\textbf{q}(s)}{ds^2} = \textbf{q}''(s)$. This results in the derivative of $W_{i}^{2}(s)$ with respect to $s$ alongside the same control points and knot indexes, calculating the result in a manner exactly the same as for the position.
