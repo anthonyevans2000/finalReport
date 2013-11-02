@@ -9,4 +9,12 @@ An interesting effect and something that showcases a flaw in the discretisation 
 \label{fig:sDivisions}}
 \end{figure} 
 
-A limitation of the solution process that prevents the solver from simply solving for an arbitrarily large number of discretisation steps is the fact that the solver becomes numerically unstable at a threshold of around 1500 discretisation intervals, meaning that solutions are often not possible past this value.
+A limitation of the solution process that prevents the solver from simply solving for an arbitrarily large number of discretisation steps is the fact that the solver becomes numerically unstable at a threshold of around 1500 discretisation intervals, meaning that solutions are often not possible past this value. A second reason which forms a limitation when one considers the desire to minimise the length of the whole printing process is the exponential growth of computation time as the number of discretisation intervals increases. The DoodleBot processes the input upon the request of the user to print a series of curves. Ideally, the processing time of the curve optimisation is not the limiting factor in the printing process. However with large discretisation values, the processing time balloons out to values such as 384 seconds, or about 6 minutes per curve. This means that a tradeoff between the computation time and optimality must be made. Figure \ref{fig:sDivTime} demonstrates the processing time increase with the number of divisions. The average traversal time for a curve on the DoodleBot hardware is about 8 seconds at the optimal torque limits. This approximately corresponds the value that was set for the DoodleBot's default number of path discretisations, at 200. This level of discretisation gives a good approximation of the optimal solution without stretching the acceleration constraints. This value also remains below the average curve execution time, so that curves are processed faster than they are traversed.
+
+\begin{figure}[htbp]  
+\includegraphics[width=\textwidth]{figures/performance/sDivTime.png}
+\caption[Processing time for a range of path discretisation lengths]{Processing time for a range of path discretisation lengths
+\label{fig:sDivTime}}
+\end{figure} 
+
+
