@@ -41,7 +41,7 @@
 \RequirePackage{url}
 \RequirePackage[titles]{tocloft}
 \setcounter{tocdepth}{2}
-\renewcommand{\cftchapfont}{\normalsize \scshape}
+%\renewcommand{\cftchapfont}{\normalsize \scshape}
 
 \renewcommand\bibname{References}
 \renewcommand\listfigurename{Listing of figures}
@@ -51,11 +51,6 @@
 
 \usepackage[closeFloats, noSeparatorLine]{packages/fltpage} %use the custom modified fltpage package
 \RequirePackage{afterpage} 
-
-
-
-
-
 
 
  
@@ -68,7 +63,7 @@
 \nobibliography*        
 
 %\RequirePackage{lettrine} % big letter at start of chapter
-\RequirePackage[top=2cm, bottom=2cm, left=2cm, right=2cm, a4paper]{geometry}
+\RequirePackage[top=3.5cm, bottom=2cm, left=2cm, right=2cm, a4paper]{geometry}
 
 \RequirePackage{fancyhdr} 
 \pagestyle{plain} % options: empty , plain , fancy
