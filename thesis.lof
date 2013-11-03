@@ -22,18 +22,19 @@
 \contentsline {figure}{\numberline {3.4.3}{\ignorespaces Communications States\relax }}{46}{figure.caption.20}
 \contentsline {figure}{\numberline {3.4.4}{\ignorespaces motorControl States\relax }}{46}{figure.caption.21}
 \contentsline {figure}{\numberline {3.5.1}{\ignorespaces Human Machine Interface System Diagram}}{50}{figure.caption.22}
+\contentsline {figure}{\numberline {3.5.2}{\ignorespaces The DoodleBot GUI}}{51}{figure.caption.23}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1.1}{\ignorespaces Trajectory completion time for a range of path discretisation divisions}}{54}{figure.caption.23}
-\contentsline {figure}{\numberline {4.1.2}{\ignorespaces Processing time for a range of path discretisation divisions}}{55}{figure.caption.24}
-\contentsline {figure}{\numberline {4.2.1}{\ignorespaces Comparison of differing velocity sampling frequencies}}{56}{figure.caption.25}
-\contentsline {figure}{\numberline {4.2.2}{\ignorespaces Plot of error magnitude against velocity sampling period}}{57}{figure.caption.26}
-\contentsline {figure}{\numberline {4.3.1}{\ignorespaces Trajectory completion time against maximum acceleration limits}}{58}{figure.caption.27}
-\contentsline {figure}{\numberline {4.3.2}{\ignorespaces Comparison of differing acceleration constraints}}{59}{figure.caption.28}
-\contentsline {figure}{\numberline {4.4.1}{\ignorespaces Examples of image interpolation performance}}{61}{figure.caption.29}
+\contentsline {figure}{\numberline {4.1.1}{\ignorespaces Trajectory completion time for a range of path discretisation divisions}}{55}{figure.caption.24}
+\contentsline {figure}{\numberline {4.1.2}{\ignorespaces Processing time for a range of path discretisation divisions}}{56}{figure.caption.25}
+\contentsline {figure}{\numberline {4.2.1}{\ignorespaces Comparison of differing velocity sampling frequencies}}{57}{figure.caption.26}
+\contentsline {figure}{\numberline {4.2.2}{\ignorespaces Plot of error magnitude against velocity sampling period}}{58}{figure.caption.27}
+\contentsline {figure}{\numberline {4.3.1}{\ignorespaces Trajectory completion time against maximum acceleration limits}}{59}{figure.caption.28}
+\contentsline {figure}{\numberline {4.3.2}{\ignorespaces Comparison of differing acceleration constraints}}{60}{figure.caption.29}
+\contentsline {figure}{\numberline {4.4.1}{\ignorespaces Examples of image interpolation performance}}{62}{figure.caption.30}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.2.1}{\ignorespaces The Governor State Machine\relax }}{68}{figure.1.C.2.1}
-\contentsline {figure}{\numberline {C.3.1}{\ignorespaces Communications program: States and State Actions\relax }}{69}{figure.1.C.3.1}
-\contentsline {figure}{\numberline {C.4.1}{\ignorespaces motorControl Program: States and State Actions\relax }}{70}{figure.1.C.4.1}
-\contentsline {figure}{\numberline {C.4.2}{\ignorespaces The two routines for managing direction and position\relax }}{72}{figure.caption.32}
+\contentsline {figure}{\numberline {C.2.1}{\ignorespaces The Governor State Machine\relax }}{69}{figure.1.C.2.1}
+\contentsline {figure}{\numberline {C.3.1}{\ignorespaces Communications program: States and State Actions\relax }}{70}{figure.1.C.3.1}
+\contentsline {figure}{\numberline {C.4.1}{\ignorespaces motorControl Program: States and State Actions\relax }}{71}{figure.1.C.4.1}
+\contentsline {figure}{\numberline {C.4.2}{\ignorespaces The two routines for managing direction and position\relax }}{73}{figure.caption.33}
