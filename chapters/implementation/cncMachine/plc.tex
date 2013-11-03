@@ -5,13 +5,13 @@ This section gives an overview to the design of the hardware control system, imp
 \subsection{Introduction to Programmable Logic Controllers}
 	Programmable logic controllers (PLCs) are computers designed for control and automation of mechanical hardware. They are designed to be robust and used in harsh environments. They have hardened I/O designed to be less susceptible to electrical noise, power surges and shorts. The physical units are very durable and designed for large temperature ranges and to be impact and vibration resistant.
 	
-	PLCs differ from micro controller boards as they come with a rudimentary operating system. The operating system is hardened against things such as memory faults and forces code to be valid before being run. They also feature control over program task management and can guarantee tasks being run at deterministic time intervals. The operating systems are usually designed with networking capability including directly sharing variable data, or even storing variable data remotely. Another major advantage is the ability to be able to be reprogrammed over a variety of interfaces (USB, Ethernet, etc) while live and in operation (important in machinery that cannot be taken off-line or stopped). They are also more deterministic than general purpose PCs, providing more reliable and predictable code execution.
+	PLCs differ from micro controller boards as they come with a rudimentary operating system. The operating system is hardened against things such as memory faults and forces code to be valid before being run. They also feature control over program task management and can guarantee tasks being run at deterministic time intervals. The operating systems are usually designed with networking capability including directly sharing variable data, or even storing variable data remotely. Another major advantage is the ability to be able to be reprogrammed over a variety of interfaces such as USB and Ethernet while in operation. This is important in machinery that cannot be taken off-line or stopped. They are also more deterministic than general purpose PCs, providing more reliable and predictable code execution.
 	
 	Each PLC can only be programmed by manufacturer propriety software via standard programming methods defined in the IEC 61131-3 standard. These include three visual languages: ladder diagrams, functional block diagrams and sequential functional charts, and two text based languages: structured text and instruction lists.
 	
 \subsection{PLC Hardware}
 	\subsubsection{Allen-Bradley 5370-CompactLogix 1769-L16ER-BB1B}
-		The PLC unit provided by NHP for the DoodleBot project is the Allen-Bradley 5370-CompactLogix 1769-L16ER-BB1B. Allen-Bradley is a well known, industrial-quality brand within Rockwell Automation's automation family of products. The PLC features 16 24V-sinking embedded DC input ports and 16 24V-sourcing embedded DC output ports, has 2 embedded Ethernet ports and a USB slave port. It has the capability of up to 16 expansion modules. The unit is programmed by the RSLogix5000 software.
+		The PLC unit provided by NHP for the DoodleBot project is the Allen-Bradley 5370-CompactLogix 1769-L16ER-BB1B. Allen-Bradley is a well known, industrial-quality brand within Rockwell Automation's automation family of products. The PLC features 16 24V-sinking embedded DC input ports and 16 24V-sourcing embedded DC output ports, has 2 embedded Ethernet ports and a USB slave port. It has the capability for up to 16 expansion modules. The unit is programmed by the RSLogix5000 software.
 	\subsubsection{AMCI 3401 Stepper Motor Module}
 		The DoodleBot uses 2 AMCI 3401 stepper motor modules added to the PLC to control the AMCI SMD23 stepper motors fitted to the DoodleBot CNC Frame. The AMCI 3401 modules monitors some reserved variables in the PLC memory which are used to control the module through specified commands. There are a large variety of move types and configuration commands that can be used. Based on these, the modules control the rotation of the stepper motor modules via producing a step signal output and direction signal output that can be read by the SMD23 stepper motor integrated drivers.
 		
@@ -26,12 +26,12 @@ This section gives an overview to the design of the hardware control system, imp
 			\item[Communications] \hfill \\
 				The Communications state machine is in charge of managing the UDP socket interface, all network communications and the populating of the command list.
 			\item[motorControl] \hfill \\
-				The motorControl state machine's job is to control all the electromechanical components on the DoodleBot Frame - primarily the stepper motors and drawing head. It also uses communicates with the checkLimitSwitch program.
+				The motorControl state machine's job is to control all the electromechanical components on the DoodleBot Frame - primarily the stepper motors and drawing head. It also communicates with the checkLimitSwitch program.
 			\item[checkLimitSwitch] \hfill \\
 				The checkLimitSwitch program periodically monitors the limit switch input and triggers an emergency stop if the switches are triggered. It runs every 10ms.
 		\end{description}
 		
-		The DoodleBot also makes use of 4 of the embedded DC input ports to read the input from the Limit Switches and 3 of the embedded DC output ports to (2 to control stepper motor direction and the third to control the solenoid). The embedded Ethernet socket interface is also used for the PC-PLC network interface. USB is also used to program/debug the PLC. 
+		The DoodleBot also makes use of four of the embedded DC input ports to read the input from the Limit Switches and three of the embedded DC output ports to control each stepper motor direction and to control the solenoid. The embedded Ethernet socket interface is also used for the PC-PLC network interface. USB is also used to program and debug the PLC. 
 		
 		For more information on why the direction input of the stepper motors are controlled by the PLC and not using the Direction Signal Output on the stepper motor modules, please see Section ~\ref{sec:stepperdirectionmanagement}.
 		
@@ -60,7 +60,7 @@ This section gives an overview to the design of the hardware control system, imp
 		The Governor, shown in Figure ~\ref{fig:governor-states}, is a state machine that control the operation of the other programs in the DoodleBot system. The states are:
 		
 		\begin{description}
-			\item[Power ON] DoodleBot waits for the user to press one of the Y limit switches to state A to start initialization.
+			\item[Power ON] DoodleBot waits for the user to press one of the Y limit switches for state A to start initialization.
 			\item[Initialisation] The DoodleBot checks the boundaries and centres itself on a 'home' position. After this is complete it progresses to state B.
 			\item[ready] The DoodleBot starts sending the 'ready' packet periodically to the PC, while waiting for a header to arrive. If a valid header arrives, it transitions to state C. If one of the Y limit switches are pressed, it returns to state A to run through the initialization routine once more.
 			\item[Buffer] The DoodleBot begins requesting commands from the PC, filling the commandBuffer. When either the commandBuffer is full or all commands have been received, it progresses to state D.
@@ -78,13 +78,13 @@ This section gives an overview to the design of the hardware control system, imp
 				\label{fig:comms-states}
 			\end{figure}
 	
-	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PCs optimization stage using the network interfaced designed in Section ~\ref{sec:network}. It's server side counterpart implemented on the PC is explored in Section ~\ref{sec:pc-network}
+	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PC's optimization stage using the network interface designed in Section ~\ref{sec:network}. It's server side counterpart implemented on the PC is explored in Section ~\ref{sec:pc-network}.
 
 	
 			\begin{description}
 				\item[Ready] The Communications program does nothing.
 				\item[Receive Header] The Communications program initializes the Ethernet socket interface and then starts requesting a header. If no header is received it continues to request until a valid one is received, in which case it returns to the Ready state and tells the Governor it is done.
-				\item[Buffering] In the Buffer state, the Communications module requests commands and populating the command buffer, ensuring it doesn't overwrite data that hasn't been executed by motorControl yet. Once it has received the amount of commands specified in the header, it returns to the Ready state and informs the Governor it's done.
+				\item[Buffering] In the Buffer state, the Communications module requests commands and populates the command buffer, ensuring it doesn't overwrite data that hasn't been executed by motorControl yet. Once it has received the amount of commands specified in the header, it returns to the Ready state and informs the Governor that it is done.
 			\end{description}
 			
 		Please see Figure ~\ref{fig:communicationsStates} in Appendix ~\ref{ch:PLC-flowcharts} for more detailed information on how the Communications Program operates.
@@ -107,7 +107,7 @@ This section gives an overview to the design of the hardware control system, imp
 				\item[Operating] In the operating state, motorControl reads the commands in the buffer and executes them. 'Move' type commands involve moving to a required point at a fixed velocity while retracting the drawing head. 'Draw' type commands involve extended the drawing head and then running a sampled velocity profile at the rate set in the header file.
 			\end{description}
 			
-		Please see Section ~\ref{sec:PLC-flowcharts-motor}in Appendix ~\ref{ch:PLC-flowcharts} for more detailed information on how motorControl and the AMCI 3401 module operate.
+		Please see Section ~\ref{sec:PLC-flowcharts-motor} in Appendix ~\ref{ch:PLC-flowcharts} for more detailed information on how motorControl and the AMCI 3401 module operate.
 
 	\subsubsection{Stepper Motor Direction Management}	
 	\label{sec:stepperdirectionmanagement}
