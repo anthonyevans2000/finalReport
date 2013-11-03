@@ -24,7 +24,7 @@
 	\subsubsection*{Image to Spline Interpolation}
 		The Image to spline interpolation module takes the bitmap image input to the DoodleBot and generates a representation of the input in terms of Quadratic URB-Splines for use by the optimisation module. This module is what generates the reference image that the hardware tries to ultimately draw onto the paper (ie, the output). See Section ~\ref{sec:design-interpolation}.
 		
-	\subsubsection*{Optimisation}
+	\subsubsection*{Time Optimisation}
 		Two of the performance indicators identified in Chapter ~\ref{ch:intro} were about how fast and how accurate the device can draw the image onto the output medium. The Optimisation module takes the input URB-Splines and generates velocity profiles (for use in the Hardware Control module) that are time optimal for given hardware constraints. See Section ~\ref{sec:design-optimisation}.
 
 	\subsubsection*{Network Interface}
