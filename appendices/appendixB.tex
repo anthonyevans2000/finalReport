@@ -1,8 +1,18 @@
 \chapter{Derivation of $s^*(t)$ given $s^{*2}(s)$}
-
-We are given that $\dot{s}^{*2}(s)$ is piecewise linear and continuous. Thus we can determine $\dot{s}^*(s)$ at each of the edges of the piecewise functions. We can then integrate between each of these points
-
+We are given that $\dot{s}^{*2}(s)$ is piecewise linear and continuous. Thus we can determine $\dot{s}^*(s)$ at each of the edges of the piecewise functions. We also have the equality
 \begin{align*}
-s(t) &= \sum_{k=1}^{s_k < s(t_k)} \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right) + \left(\left(\frac{(t-t_{last})(\dot{s}^2_{next} - \dot{s}^2_{last})}{2 \Delta s} + \dot{s}_k\right)^2 - \dot{s}^2_k \right)\frac{\Delta s}{(\dot{s}^2_{next} - \dot{s}^2_{last})}\\	
+t^*(s) &= \int^s_0\frac{1}{\dot{s^*}(s)}ds
+\end{align*} 
+The computer algorithm used to extract a profile of $s$ for a given increment of $t$ calculates the total time taken to reach the ends of each of the piecewise sections. A piecewise integration is performed between each of these points in order to obtain a given time increment as follows;
+\begin{align*}
 \Delta t_k(s) &= \int_{s_k}^s \frac{1}{\sqrt{\frac{\dot{s}(s_{k+1}) - \dot{s}(s_{k})}{s_{k+1} - s_{k}}} u + \dot{s}(s_{k})} du
+\end{align*}
+This equation gives the increment in time from the border of a piecewise section of $\dot{s}^*(s)$, where $s_k$ is the edge of the border.
+Given that we can calculate the value of $t$ at the borders of each of the piecewise function by summing all previous piecewise integrals, we can denote the value of $t$ at the $k$th border as $t_k$ and the value of $s$ at the $k$th border as $s_k$. The border values of $s_k$ can be computed via;
+\begin{align*}
+s_{k+1} - s_k &= \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right)
+\end{align*}
+This bordering value of $s_k$ allows us to compute the increment of $\Delta_s$ past this border for any $\Delta_t$. Hence, we can index a given value of $t$ into the interval where $t_k < t = t_k + \Delta_t < t_{k+1}$ in order to obtain the relation
+\begin{align*}
+s(t) &= \sum_{k=1}^{s_k < s(t_k)} \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right) + \left(\left(\frac{(t-t_{k})(\dot{s}^2_{k+1} - \dot{s}^2_{k})}{2 \Delta s} + \dot{s}_k\right)^2 - \dot{s}^2_k \right)\frac{\Delta s}{(\dot{s}^2_{k+1} - \dot{s}^2_{k})}\\	
 \end{align*}
