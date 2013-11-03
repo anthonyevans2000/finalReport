@@ -31,7 +31,7 @@ The first (TOP) and second (BOTTOM) derivatives of the parametrised curve positi
 \label{fig:xy_dds_ds}}
 \end{figure}
 
-Given that we have discretised and found the corresponding constraints to complete the construction of the problem, the solver SeDuMi can compute the discrete $\dot{s}^*(s)$, which is the approximated time optimal trajectory. The trajectory which was arrived at for the given example curve can be seen in Fig.~\ref{fig:sdot_st}.
+Given that there is a discretized problem with appropriate constraints, the solver SeDuMi can compute the discrete $\dot{s}^*(s)$, which is the approximated time optimal trajectory. The trajectory which was arrived at for the given example curve can be seen in Fig.~\ref{fig:sdot_st}.
 The final calculation step in order to achieve the desired $s^*(t)$ requires that we compute the resulting time $t$ for each $s(s)$ via the inverse relation
 \begin{align*}
 t(s) &= \int_0^s\frac{1}{\dot{s}^*(s)}du\\ 
@@ -45,11 +45,11 @@ The optimal curve velocity (TOP) and the retrieved path trajectory (BOTTOM) for 
 \label{fig:sdot_st}}
 \end{figure}
 
-Since $\dot{s}^*(s)$ is defined in a piecewise non-linear fashion due to its direct relation to the piecewise linear trajectory $b(s)$, we obtain a mapping between $t$ and $s$ for arbitrary $t$ via the algorithm outlined in Appendix C. The output $s(t)$ can be seen in Fig.~\ref{fig:sdot_st}. Though the solution can be solved for a piecewise closed form, an algorithm that solves for a given discrete sampling rate $k\Delta T$ was used instead. This allows us to specify an arbitrary desired velocity sampling frequency and hence use the subsequently calculated values of $s(k\Delta T)$ to generate the sampled velocity profile via 
+Since $\dot{s}^*(s)$ is defined in a piecewise non-linear fashion due to its direct relation to the piecewise linear trajectory $b(s)$, a mapping between $t$ and $s$ for arbitrary $t$ can be obtained via the algorithm outlined in Appendix C. The output $s(t)$ can be seen in Fig.~\ref{fig:sdot_st}. Though the solution can be solved for a piecewise closed form, the required output data type of the Optimisation module is a sampled velocity profile, so an algorithm that solves for a given discrete sampling rate $k\Delta T$ is used. This allows for an arbitrary desired velocity sampling frequency to be specified and hence use the subsequently calculated values of $s(k\Delta T)$ to generate the sampled velocity profile via 
 \begin{align*}
 \frac{d\textbf{q}\left(k \Delta T\right)}{dt} &= \frac{\textbf{q}\left(s(k\Delta T)\right)}{ds}\frac{ds(k\Delta T)}{dt}
 \end{align*}
-Hence, we have generated the optimal axis velocity curves that can be sent to the unit in order to faithfully follow a URBS curve with a time optimal trajectory.
+Hence, the process has generated the optimal axis velocity curves that can be sent to the unit in order to faithfully follow a URBS curve with a time optimal trajectory.
 An output of the optimal trajectory $\dot{\textbf{q}}(k\Delta T)$ and $\ddot{\textbf{q}}(k\Delta T)$ can be seen in Fig.~\ref{fig:bangbang}.
 
 \begin{figure}[htbp]

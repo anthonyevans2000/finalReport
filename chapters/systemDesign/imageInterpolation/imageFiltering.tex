@@ -1,5 +1,5 @@
 \subsection{Image Filtering}
-The edge detecting filter that met our requirements of long and unbroken edge sections was the Canny edge detector. The Canny detector is a multi-stage filtering and edge detection algorithm. Essentially, the Canny calculates the colour intensity gradient for the image and determines the maxima for these gradients. These maxima correspond to edges in the image. It then traces along these detected edges using a thresholding argument on the original image. The trace will continue along the calculated direction of the edge if the intensity of the pixels on the path of the trace are over a threshold. If the trace meets another edge, the two are joined. This processes extends the edges and allows them to join edges that seem to be continuous.
+The edge detecting filter that met the specified requirements of long and unbroken edge sections was the Canny edge detector. The Canny detector is a multi-stage filtering and edge detection algorithm. Essentially, the Canny calculates the colour intensity gradient for the image and determines the maxima for these gradients. These maxima correspond to edges in the image. It then traces along these detected edges using a thresholding argument on the original image. The trace will continue along the calculated direction of the edge if the intensity of the pixels on the path of the trace are over a threshold. If the trace meets another edge, the two are joined. This processes extends the edges and allows them to join edges that seem to be continuous.
 In order to allow the Canny edge detector to perform optimally, some pre-filtering was performed on the base image before the Canny was used. Then some post processing selected the edges which had desirable properties, these edges were passed on for further processing.
 \subparagraph{Grayscaling}
 The initial step was to convert the image to a greyscale intensity data format. The Canny filter only works on intensity, so colour information is irrelevant for our purposes. To obtain a greyscale image, the three colour channels of the Red-Green-Blue image are averaged together. This results in a single value ranging from $0-255$ for each pixel; where $0$ is black, $255$ is white and shades of grey lie in between.
@@ -17,8 +17,9 @@ The final step in the process is the culling of edges deemed insignificant. Desp
 \subsubsection{Image comparison}
 Figure \ref{fig:demo} displays a reference image at various points through the stages of the filtering process.
 
-\begin{figure}  
-\includegraphics[width=\textwidth]{figures/systemDesign/demo.png}
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/systemDesign/demo.png}
 \caption[Image filtering process] A series of images demonstrating the steps in the image filtering process. From top left to bottom right; 1. Initial Image 2. Gaussian filter 3. Image dilation 4. Canny edge detector 5. Linear edge approximation 6. Edge culling {
 \label{fig:demo}}
 \end{figure}

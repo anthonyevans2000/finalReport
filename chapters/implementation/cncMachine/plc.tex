@@ -1,4 +1,4 @@
-\section{Hardware Control Software}
+\section{Control Software}
 
 This section gives an overview to the design of the hardware control system, implemented on a Programmable Logic Controller. For more detailed information on how this module is implemented on the PLC, please see Appendix ~\ref{ch:PLC-flowcharts}.
 
@@ -41,7 +41,7 @@ This section gives an overview to the design of the hardware control system, imp
 \begin{landscape}
 		\vspace*{\fill}
 		\includegraphics[width=\hsize]{figures/cncMachine/PLC_architecture}
-		\captionof{figure}{The program and I/O architecture of the PLC. Arrows represent data flow, and when labelled, are global scope variables.}
+		\captionof{figure}[PLC Architecture and I/O]{The program and I/O architecture of the PLC. Arrows represent data flow, and when labelled, are global scope variables.}
 		\label{fig:PLCarchitecture}
 		\vspace*{\fill}
 \end{landscape}
@@ -78,7 +78,7 @@ This section gives an overview to the design of the hardware control system, imp
 				\label{fig:comms-states}
 			\end{figure}
 	
-	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PCs optimization stage using the network interfaced designed in Section ~\ref{sec:network}.
+	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PCs optimization stage using the network interfaced designed in Section ~\ref{sec:network}. It's server side counterpart implemented on the PC is explored in Section ~\ref{sec:pc-network}
 
 	
 			\begin{description}

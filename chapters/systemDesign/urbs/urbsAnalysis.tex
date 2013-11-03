@@ -1,9 +1,9 @@
 \subsection{Uniform Rational Basis Spline Analysis}
 Given their benefits, 3rd order URBS were used as the curve data structure for the DoodleBot. 
 
-The general weighting structure of an URBS is the same for each and every curve, given the uniformity of their knots. This means that we can easily calculate the basis functions for an URBS given only the number of control points. Thus an URBS curve is completely defined by the number and location of its control points.
+The general weighting structure of an URBS is the same for each and every curve, given the uniformity of their knots. This means that the basis functions can easily be calculated for an URBS given only the number of control points. Thus an URBS curve is completely defined by the number and location of its control points.
 
-A knot vector is a set of numbers which define the locations of all of the knots that a curve contains. An URBS contains only evenly spaced knots. The knot vector defines the knot spans of a curve. Over each span, only three control points will have non-zero weighting. At the end of each span, one control point's weighting goes to zero and is substituted by another control point, whose weighting begins from zero also. The numeric values of the knots within the vector are unimportant; the curve parametrising variable $s$ starts from the first knot and ends at the last and all knots are evenly spaced. We have arbitrarily defined the knots such that all lie between zero and one.
+A knot vector is a set of numbers which define the locations of all of the knots that a curve contains. An URBS contains only evenly spaced knots. The knot vector defines the knot spans of a curve. Over each span, only three control points will have non-zero weighting. At the end of each span, one control point's weighting goes to zero and is substituted by another control point, whose weighting begins from zero also. The numeric values of the knots within the vector are unimportant; the curve parametrising variable $s$ starts from the first knot and ends at the last and all knots are evenly spaced. For the DoodleBot system, the knots have been arbitrarily defined such that all lie between zero and one.
 
 The knot vector defines weighting coefficients for each of the control points. The values of these weights quadratically shifts across the domain of $s \in [0, 1]$. This brings consecutive control points into prominence evenly as the path parameter is traversed. Each point on the curve consists of a linear combination of the control points that are non-zero within the knot span. This is demonstrated in the following equation
 \begin{align*}
@@ -28,7 +28,7 @@ N &\in \mathbb{Z}
 
 Note that there are three repeated knots at the beginning and end of a curve. The knot span of these points each has a width of zero, meaning that the curve does not exist inside these spans. These knots make sure that the curve terminates at the location of the first and last control point. They also ensure that the weighting functions have defined values throughout the recursive calculations.
 
-The knot vector can be calculated when one is given the number of control points of a curve. Given the knot vector we can use the recursive definition of URBS basis functions to calculate the the control point weightings for any given $s \in [0, 1]$
+The knot vector can be calculated when one is given the number of control points of a curve. Given the knot vector, the recursive definition of URBS basis functions can be used to calculate the control point weightings for any given $s \in [0, 1]$
 \begin{align*}
 W_{i}^d(s) &=   \frac{s - K_i}{K_{i+d} - K_i}W_{i}^{d-1}(s)  +  \frac{K_{i + d + 1} - s}{K_{i + d + 1} - K_{i+1}}W_{i+1}^{d-1}(s)\\
 W_{i}^0(s) &= \begin{cases}
@@ -38,7 +38,7 @@ W_{i}^0(s) &= \begin{cases}
 \end{align*}
 Where $K_i$ is the knot at index $i$ and $d$ is the dimension of the URBS curve.
 
-For the cases where the multiplying fractions result in $\frac{0}{0}$, we take the result to be $0$.
+For the cases where the multiplying fractions result in $\frac{0}{0}$, the result is taken as $0$.
 
 When the URBS curve is of dimension 2 the line equation for $q_i(s) = q(s)\bigm|_{K_i \leq s < K_{i+1}}$ results in the following definition \cite{website:nurbsExplain};
 \begin{align*}
