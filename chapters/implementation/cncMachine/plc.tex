@@ -78,7 +78,7 @@ This section gives an overview to the design of the hardware control system, imp
 				\label{fig:comms-states}
 			\end{figure}
 	
-	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PCs optimization stage. 
+	The Communications program, shown in Figure ~\ref{fig:comms-states}, has the role of communicating with the PC to populate the command buffer with the output of the PCs optimization stage using the network interfaced designed in Section ~\ref{sec:network}.
 
 	
 			\begin{description}
@@ -87,7 +87,7 @@ This section gives an overview to the design of the hardware control system, imp
 				\item[Buffering] In the Buffer state, the Communications module requests commands and populating the command buffer, ensuring it doesn't overwrite data that hasn't been executed by motorControl yet. Once it has received the amount of commands specified in the header, it returns to the Ready state and informs the Governor it's done.
 			\end{description}
 			
-		Please see Figure ~\ref{fig:communicationsStates} in Appendix ~\ref{ch:PLC-flowcharts} for more detailed information on how Communications operates.
+		Please see Figure ~\ref{fig:communicationsStates} in Appendix ~\ref{ch:PLC-flowcharts} for more detailed information on how the Communications Program operates.
 
 
 \subsection{motorControl}
