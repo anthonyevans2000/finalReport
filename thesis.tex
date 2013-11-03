@@ -6,10 +6,21 @@
 \usepackage{pdflscape}
 \usepackage{multirow}
 \usepackage{wrapfig}
+\usepackage{background}
+
+\SetBgContents{\includegraphics{figures/header.jpg}}
+\SetBgAngle{0}
+\SetBgPosition{current page.north}
+\SetBgOpacity{1}
+\SetBgScale{1}
+\SetBgColor{black}
+\SetBgVshift{-1.25cm}
+
 
 \begin{document}
 
 % the front matter
+\NoBgThispage
 \input{frontmatter/coverpage}
 \maketitle
 %\copyrightpage
@@ -21,6 +32,8 @@
 %\acknowledgments
 
 \onehalfspacing
+
+
 
 % include each chapter...
 \include{chapters/introduction/introduction}
