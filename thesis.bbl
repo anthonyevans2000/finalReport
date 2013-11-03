@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -58,6 +58,11 @@ D.~Verscheure, B.~Demeulenaere, J.~Swevers, J.~De~Schutter, and M.~Diehl.
   (10):\penalty0 2318--2327, 2009.
 \newblock ISSN 0018-9286.
 \newblock \doi{10.1109/TAC.2009.2028959}.
+
+\bibitem[Wapcaplet and Teravolt(2010)]{website:stepper}
+Wapcaplet and Teravolt.
+\newblock Gif of wapcaplet's 4 images: steppermotor.gif, 2010.
+\newblock URL \url{http://en.wikipedia.org/wiki/File:StepperMotor.gif}.
 
 \bibitem[Yeh and Hsu(1999)]{Yeh99}
 S.-S. Yeh and P.-L. Hsu.
