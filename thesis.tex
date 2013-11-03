@@ -17,6 +17,10 @@
 \SetBgVshift{-1.25cm}
 
 
+\usepackage[firstpage]{draftwatermark}
+\SetWatermarkLightness{1}
+\SetWatermarkText{\includegraphics[angle=-45]{figures/cover.jpg}}
+
 
 \renewcommand{\chapterheadstartvskip}{\vspace*{-2\baselineskip}} 
 
@@ -29,7 +33,10 @@
 % the front matter
 \NoBgThispage
 \input{frontmatter/coverpage}
-\maketitle
+\newpage
+\thispagestyle{empty}
+\mbox{}
+%\maketitle
 %\copyrightpage
 %\abstractpage
 \tableofcontents
