@@ -1,6 +1,6 @@
 \chapter{Derivation of $s^*(t)$ given $s^{*2}(s)$}
 
-We are given that $\dot{s}^{*2}(s)$ is piecewise linear and continuous. Thus we can determine $\dot{s}^*(s)$ at each of the edges of the piecewise functions. We can then integrate between each of these points 
+We are given that $\dot{s}^{*2}(s)$ is piecewise linear and continuous. Thus we can determine $\dot{s}^*(s)$ at each of the edges of the piecewise functions. We can then integrate between each of these points
 
 \begin{align*}
 s(t) &= \sum_{k=1}^{s_k < s(t_k)} \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right) + \left(\left(\frac{(t-t_{last})(\dot{s}^2_{next} - \dot{s}^2_{last})}{2 \Delta s} + \dot{s}_k\right)^2 - \dot{s}^2_k \right)\frac{\Delta s}{(\dot{s}^2_{next} - \dot{s}^2_{last})}\\	
