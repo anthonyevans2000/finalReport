@@ -1,6 +1,6 @@
 \subsection{Results}
-Here, the process that a curve undergoes from initialisation to the generation of the final final velocity profile will be demonstrated, drawing upon the theoretical underpinnings of the previous sections.
-Firstly, a curve is obtained through manual manipulation of control points or by extraction from image features. The curve that will be taken through the optimisation process can be seen in Figure \ref{fig:example}. The curve has seven control points and has a complex shape that will incur several changes in the limiting axis and hence switching points, demonstrating the ability of our optimisation process to drive the machine to the limits of its physical limitations.
+Here, the process that a curve undergoes from initialisation to the generation of the final velocity profile will be demonstrated, drawing upon the theoretical underpinnings of the previous sections.
+Firstly, a curve is obtained through manual manipulation of control points or by extraction from image features. The curve that will be taken through the optimisation process can be seen in Figure \ref{fig:example}. The curve has seven control points and has a complex shape that will incur several changes in the limiting axis and hence contain several switching points, demonstrating the ability of our optimisation process to drive the machine to the limits of its physical limitations.
 
 \begin{figure}[htbp]  
 \centering
@@ -31,7 +31,7 @@ The first (TOP) and second (BOTTOM) derivatives of the parametrised curve positi
 \label{fig:xy_dds_ds}}
 \end{figure}
 
-Given that there is a discretized problem with appropriate constraints, the solver SeDuMi can compute the discrete $\dot{s}^*(s)$, which is the approximated time optimal trajectory. The trajectory which was arrived at for the given example curve can be seen in Fig.~\ref{fig:sdot_st}.
+Given that there is a discretised problem with appropriate constraints, the solver SeDuMi can compute the discrete $\dot{s}^*(s)$, which is the approximated time optimal trajectory. The trajectory which was arrived at for the given example curve can be seen in Fig.~\ref{fig:sdot_st}.
 The final calculation step in order to achieve the desired $s^*(t)$ requires that we compute the resulting time $t$ for each $s(s)$ via the inverse relation
 \begin{align*}
 t(s) &= \int_0^s\frac{1}{\dot{s}^*(s)}du\\ 
@@ -45,17 +45,17 @@ The optimal curve velocity (TOP) and the retrieved path trajectory (BOTTOM) for 
 \label{fig:sdot_st}}
 \end{figure}
 
-Since $\dot{s}^*(s)$ is defined in a piecewise non-linear fashion due to its direct relation to the piecewise linear trajectory $b(s)$, a mapping between $t$ and $s$ for arbitrary $t$ can be obtained via the algorithm outlined in Appendix C. The output $s(t)$ can be seen in Fig.~\ref{fig:sdot_st}. Though the solution can be solved for a piecewise closed form, the required output data type of the Optimisation module is a sampled velocity profile, so an algorithm that solves for a given discrete sampling rate $k\Delta T$ is used. This allows for an arbitrary desired velocity sampling frequency to be specified and hence use the subsequently calculated values of $s(k\Delta T)$ to generate the sampled velocity profile via 
+Since $\dot{s}^*(s)$ is defined in a piecewise non-linear fashion due to its direct relation to the piecewise linear trajectory $b(s)$, a mapping between $t$ and $s$ for arbitrary $t$ can be obtained via the algorithm outlined in Appendix B. The output $s(t)$ can be seen in Fig.~\ref{fig:sdot_st}. Though the solution can be solved for a piecewise closed form, the required output data type of the Optimisation module is a sampled velocity profile, so an algorithm that solves for a given discrete sampling rate $k\Delta T$ is used. This allows for an a desired velocity sampling frequency to be specified and subsequently calculated using sampled values of $s(k\Delta T)$ to generate the sampled velocity profile via 
 \begin{align*}
 \frac{d\textbf{q}\left(k \Delta T\right)}{dt} &= \frac{\textbf{q}\left(s(k\Delta T)\right)}{ds}\frac{ds(k\Delta T)}{dt}
 \end{align*}
 Hence, the process has generated the optimal axis velocity curves that can be sent to the unit in order to faithfully follow a URBS curve with a time optimal trajectory.
-An output of the optimal trajectory $\dot{\textbf{q}}(k\Delta T)$ and $\ddot{\textbf{q}}(k\Delta T)$ can be seen in Fig.~\ref{fig:bangbang}.
+An output of the time optimal trajectory $\dot{\textbf{q}}(k\Delta T)$ and $\ddot{\textbf{q}}(k\Delta T)$ can be seen in Fig.~\ref{fig:bangbang}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/optimisation/bangbang_xy_ddt_dt.png}
 \caption[$\dot{\textbf{q}}^*(t)$ and $\ddot{\textbf{q}}^*(t)$]{
-The optimal axis velocity (TOP) and the optimal path acceleration (BOTTOM) for the example curve.
+The time optimal axis velocity (TOP) and the time optimal axis acceleration (BOTTOM) for the example curve.
 \label{fig:bangbang}}
 \end{figure}

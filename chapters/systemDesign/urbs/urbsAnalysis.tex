@@ -15,7 +15,7 @@ When the $s$ parameter passes a knot value such as $s = 0.5$ in Fig~\ref{fig:urb
 
 In this way each point on the curve is defined by a linear combination of three control points and each control point has weighted influence over a similar sized domain on $s$. The weightings for each control point can be determined given the knot vector.
 
-The knot vector can be obtained by applying the following algorithm, where $N$ is defined as the number of control points.
+The knot vector can be obtained by applying the following algorithm;
 \begin{align*}
 K_3 &= \left[0, 0, 0, 1, 1, 1\right]\\  
 K_4 &= \left[0, 0, 0, \frac{1}{2}, 1, 1, 1\right]\\  
@@ -25,6 +25,7 @@ K_N &= \left[0, 0, 0, \frac{1}{N-2},\frac{2}{N-2} \cdots ,\frac{N-2}{N-2}, 1, 1\
 N &\geq 3\\
 N &\in \mathbb{Z}
 \end{align*}
+Where $N$ is defined as the number of control points.
 
 Note that there are three repeated knots at the beginning and end of a curve. The knot span of these points each has a width of zero, meaning that the curve does not exist inside these spans. These knots make sure that the curve terminates at the location of the first and last control point. They also ensure that the weighting functions have defined values throughout the recursive calculations.
 
@@ -36,7 +37,7 @@ W_{i}^0(s) &= \begin{cases}
    0 & \text{otherwise}
   \end{cases}
 \end{align*}
-Where $K_i$ is the knot at index $i$ and $d$ is the dimension of the URBS curve.
+Where $K_i$ is the knot at index $i$ and the value for $d$ in the first recursive call is the dimension of the URBS curve.
 
 For the cases where the multiplying fractions result in $\frac{0}{0}$, the result is taken as $0$.
 

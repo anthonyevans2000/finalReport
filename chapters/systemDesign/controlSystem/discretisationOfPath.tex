@@ -10,6 +10,7 @@ but rather a partitioned version
 
 \begin{align*}
 \ddot{\textbf{q}}(s) &= \textbf{q}''(k \Delta_s)b(s) + \textbf{q}'(k\Delta_s)a(s)\\
+k\Delta_s &\leq s < (k+1)\Delta_s\\
 \ddot{\textbf{q}}_{min} &\leq \ddot{\textbf{q}}(s) \leq \ddot{\textbf{q}}_{max}
 \end{align*}
 
@@ -24,7 +25,7 @@ b(s) &= \dot{s}^2\\
 \end{align*}
 And will hence integrate the piecewise constant $a(s)$ over the discretisation period to become linear.
  
-Given this closed form of the path trajectory, it is a simple matter for a solver to give an answer.
+Given this form of the path trajectory, it is a simple matter for a solver to give an answer.
 
 Formally, the discretised version of the time optimal control problem is given by;
 \begin{align*}

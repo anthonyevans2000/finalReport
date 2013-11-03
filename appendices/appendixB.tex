@@ -1,4 +1,4 @@
-\chapter{Derivation of $s^*(t)$ given $s^{*2}(s)$}
+\chapter{Derivation of $s^(t)$ given $\dot{s}^{2}(s)$}
 We are given that $\dot{s}^{*2}(s)$ is piecewise linear and continuous. Thus we can determine $\dot{s}^*(s)$ at each of the edges of the piecewise functions. We also have the equality
 \begin{align*}
 t^*(s) &= \int^s_0\frac{1}{\dot{s^*}(s)}ds
@@ -12,7 +12,7 @@ Given that we can calculate the value of $t$ at the borders of each of the piece
 \begin{align*}
 s_{k+1} - s_k &= \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right)
 \end{align*}
-This bordering value of $s_k$ allows us to compute the increment of $\Delta_s$ past this border for any $\Delta_t$. Hence, we can index a given value of $t$ into the interval where $t_k < t = t_k + \Delta_t < t_{k+1}$ in order to obtain the relation
+This bordering value of $s_k$ allows us to compute the increment of $\Delta_s$ past this border for any $\Delta_t$. Hence, we can index a given value of $t$ into the interval where $t_k < t = t_k + \Delta_t \leq t_{k+1}$ in order to obtain the relation
 \begin{align*}
 s(t) &= \sum_{k=1}^{s_k < s(t_k)} \frac{2\Delta s}{\dot{s}^2_k - \dot{s}^2_{k-1}} \left(\dot{s}_k -\dot{s}_{k-1}\right) + \left(\left(\frac{(t-t_{k})(\dot{s}^2_{k+1} - \dot{s}^2_{k})}{2 \Delta s} + \dot{s}_k\right)^2 - \dot{s}^2_k \right)\frac{\Delta s}{(\dot{s}^2_{k+1} - \dot{s}^2_{k})}\\	
 \end{align*}

@@ -1,12 +1,12 @@
 \subsection{Purpose}
 In Section ~\ref{fig:control}, an open-loop control system was designed that would accurately be able to reproduce certain velocity profiles within certain acceleration constraints - a design requirement that would limit the time it takes the DoodleBot to draw. The Performance Indicators defined in Chapter ~\ref{ch:intro} specified drawing time as an attribute to minimize.
 
-The purpose of the time optimisation module is to make maximal use of the available power of the stepper motors without exceeding their acceleration constraints, minimizing the time taken to draw while allowing the open loop control system to operate as required.
+The purpose of the time optimisation module is to make maximal use of the available power of the stepper motors without exceeding their acceleration constraints. Doing so minimizes the time taken to draw a curve while still allowing the open loop control system to operate error free as required.
 
 \subsection{Path Velocity Optimisation}
-A machine that follows prescribed paths has an inherent trade-off between obeying the physical restrictions of the device and following a path at the fastest possible speed. There is a wealth of information surrounding the topic of the optimisation of such physical systems, seen in \cite{Bardine10},  \cite{Chen07}, \cite{Choi01}, \cite{Tseng09}, \cite{Schutter09} and \cite{Yeh99}. Each study was relevant to the optimisation problem present in the DoodleBot system, but used differing strategies and overcame different limitations to achieve a trajectory that minimised some particular cost. The method most relevant to the project, and the one that was chosen to implement was \cite{Schutter09}. A comparison of the different optimisation strategies is instructive and can be seen in Appendix B.
+A machine that follows prescribed paths has an inherent trade-off between obeying the physical restrictions of the device and following a path at the fastest possible speed. There is a wealth of information surrounding the topic of the optimisation of such physical systems, seen in \cite{Bardine10},  \cite{Chen07}, \cite{Choi01}, \cite{Tseng09}, \cite{Schutter09} and \cite{Yeh99}. Each study was relevant to the optimisation problem present in the DoodleBot system and used differing strategies and overcame different limitations to achieve a trajectory that minimised some particular cost. The method most relevant to the project and the one that was chosen to implement was \cite{Schutter09}.
 
-The dynamics of the drawing head can be viewed as a double integrator system. With limits on $\ddot{\textbf{q}}(t)  = \begin{bmatrix}
+The dynamics of the drawing head can be viewed as a double integrator system. Given calculated limits on $\ddot{\textbf{q}}(t)  = \begin{bmatrix}
 \frac{d^2x(t)}{dt^2}\\
 \frac{d^2y(t)}{dt^2}
 \end{bmatrix}= \begin{bmatrix}
@@ -14,7 +14,7 @@ The dynamics of the drawing head can be viewed as a double integrator system. Wi
 \ddot{y}(t)
 \end{bmatrix}$, an equality can be constructed that will impose limits on the trajectory of each of the two axes in following the path. The specifics of the path and the speed of its traversal can be separated via the path parametrisation $s$.
 \begin{align*}
-\textbf{q}(s) &= \sum^N_{i=1}\textbf{N}^2_iW_{i,2}(s) = \begin{bmatrix}
+\textbf{q}(s) &= \sum^N_{i=1}\textbf{N}^2_iW^2_i(s) = \begin{bmatrix}
 x(s)\\
 y(s)
 \end{bmatrix}\\
@@ -48,7 +48,7 @@ In order to find these switching points to obtain the minimum time of traversal 
 
 One could attempt to determine the limiting axis at each point on the curve and then determine the optimal points for switching between accelerating and decelerating the path velocity via iterative shooting methods to meet the imposed limitations. This result will give the global optimum for the minimum time of path traversal, given the constraints. A drawback of this problem is that it is a difficult problem to solve for the general case.
 
-A simpler and more robust option is to break the path into discrete segments, calculate the maximum $\textbf{q}'(s)$ and $\textbf{q}''(s)$ for each segment and accelerate along the path such that these maximum values are satisfied at the commencement of and during each of these discrete divisions along the path. This method is a discrete approximation of the continuous method outlined above. As such the answer that results is an approximation of the global optimum. This arises as limits are generated for the sections of the path, which might be confined to a small area. These limiting areas are artificially spread out with the discretisation of the path. Thus the problem that is solved is not an accurate representation of the true problem. However we are able to generate constraints on the system that match the true constraints, which will not be exceeded. The ensuing calculation will minimise the time of completion for the approximated system. Thus the approximated solution will approach the global solution as the granularity and hence accuracy of the discrete approximation increases.
+A simpler and more robust option is to break the path into discrete segments, calculate the maximum $\textbf{q}'(s)$ and $\textbf{q}''(s)$ for each segment and accelerate along the path such that these maximum values are satisfied at the commencement of and during each of these discrete divisions along the path. This method is a discrete approximation of the continuous method outlined above. As such the answer that results is an approximation of the global optimum. This arises as the maximum restriction within a section of the path is used as the restriction for the whole section of the path, which might otherwise be confined to a smaller area. These limiting areas are artificially spread out with the discretisation of the path. Thus the problem that is solved is not an accurate representation of the true problem. However we are able to generate constraints on the system that correspond to the true constraints and these constraints will not be exceeded. The ensuing calculation will minimise the time of completion for the approximated system. Thus the approximated solution will approach the global solution as the granularity and hence accuracy of the discrete approximation increases.
 
 Once all of the switching points are identified, the optimal path trajectory $s^*(t)$ can be easily calculated, from which desired velocities and positions along $x^*(t)$ and $y^*(t)$ can also be calculated.
 
