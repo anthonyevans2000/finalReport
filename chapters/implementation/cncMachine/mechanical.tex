@@ -36,12 +36,13 @@
 	
 	The DoodleBot uses two AMCI SMD23 stepper motors with integrated drivers to drive the dynamics of the X and Y axes respectively. The SMD23 has an integrated driver which controls the activation of the internal stepper motor electromagnets and only needs to be provided with power, a step signal and a direction signal.
 \subsection{Limit Switches}
-	The Steute EM 95 limit switches are mounted such that as either of the axes approach the limits of their rails, they will activate the switch. These are used during the initialisation phase to find the centre point and then are used during operation as emergency stops that activate when unwanted stepper motor operation occurs (ie, they go try to push the axes beyond the boundaries of the frame).
+	The Steute EM 95 limit switches are mounted such that as either of the axes approach the limits of their range of motion, the switches will trip. This functionality is used during the initialisation phase to discover the centre point of the frame and is also used during operation as emergency stops that activate when unwanted operation occurs (ie, the drawing head is trying to move outside its boundaries).
 \subsection{Drawing Head - Z-axis}
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.3\textwidth]{figures/cncMachine/Z_axis.jpg}
 		\caption[The drawing head - Z-axis]{The drawing head, which was designed and constructed by the DoodleBot team}
+		\label{fig:z-axis}
 	\end{figure}
 
 	The drawing head was designed and constructed by the DoodleBot team as per the project scope. Figure ~\ref{fig:z-axis} is a photo of the component with the housing cover removed. 
