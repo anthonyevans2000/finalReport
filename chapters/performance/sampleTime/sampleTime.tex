@@ -16,13 +16,11 @@ The Optimisation module is able to produce continuous velocity profiles that per
 \label{fig:tStep}
 \end{figure}  
 
-Figure ~\ref{fig:tStep} shows a chart of the error in the image verses the sampling time, where the error is the deviation between the sampled curve and the original curve summed for a certain number of samples across the length of the curve. The chart shows that as the sampling time drops (ie, higher resolution), the error reduces linearly, as expected.
+Figure ~\ref{fig:tStep} shows a chart of the error in the image verses the sampling time, where the error is the deviation between the sampled curve and the original curve summed for a certain number of samples across the length of the curve. The chart shows that as the sampling time drops  the error reduces linearly.
 
-However in the real system, there are minimum constraints on how low this value can go. The sample rate cannot be lower than the time it takes for the network interface to buffer more commands and it cannot be lower than the time it takes for the PLC to process the command and then implement it on the stepper motors, or whole commands will be skipped (or run out of time). 
+However in the real system, there are minimum constraints on how low the sampling period can go. The sample rate cannot be lower than the time it takes for the network interface to buffer more commands and it cannot be lower than the time it takes for the PLC to process the command and then implement it on the stepper motors, or whole commands will be skipped. 
 
-
-
-An even more major effect of lower sampling rates becomes apparent in Figure ~\ref{fig:timestep}. As the sample time reduces from 200ms to 40ms, there is a very clear improvement in the accuracy of the image, as the simulated results would suggest. However, when the sampling time is reduced to 20ms the error actually increases significantly. 
+Another major effect of lower sampling rates becomes apparent in Figure ~\ref{fig:timestep}. As the sample time reduces from 200ms to 40ms, there is a clear improvement in the accuracy of the image, as the simulated results would suggest. However, when the sampling time is reduced to 20ms the error actually increases significantly. 
 
 \begin{center}
 \centering
@@ -31,7 +29,7 @@ An even more major effect of lower sampling rates becomes apparent in Figure ~\r
 \label{fig:periodscan}
 \end{center}
 
-This unexpected error with lower sample times is likely due to how accurately the PLC is actually able to operate at the specified sample time. Figure ~\ref{fig:periodscan} shows a real vs ideal scenario on how sample time. In the ideal scenario, as soon as the internal counter reaches the sample time, a command will be executed instantly and the timer reset. In reality however, the PLC has to scan through the code one line at a time and might take some extra time before executing the command and resetting the internal timer, meaning the system will run a single command for longer than it should be. 
+This unexpected error with lower sample times is likely due to how accurately the PLC is actually able to operate at the specified sample time. Figure ~\ref{fig:periodscan} shows a real vs ideal scenario on how sample time can vary. In the ideal scenario, as soon as the internal counter reaches the sample time a command will be executed and the timer reset. In reality, the PLC has to scan through the code one line at a time and might take some extra time before executing the command and resetting the internal timer. This means that the system will run a single command for longer than it should. 
 
 The PLC scan times vary from 0.1ms-1.5ms, and hence cannot be compensated for in the code. Since the scan times don't seem to be effected by sample times, lower sample times lead to a higher proportional error in the real vs specified sample time. This creates a trade off between inherent error from approximation by lowering the scan times and minimizing the proportion of error between the real and ideal scan times by increasing the scan times. Experimentation found $40ms$ or $25Hz$ to be the best compromise between these two trade offs. 
 

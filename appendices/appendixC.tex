@@ -111,9 +111,9 @@
 	
 				\begin{description}
 					\item[Absolute Move, Relative Move] \hfill \\
-						Relative Moves are treated by the rest of the code as usual. Absolute Moves must be preceded by a Preset Current Position command with the position set to x\_pos and y\_pos. <blah> function monitors the directional state of the AMCI 3401 modules and mirrors this onto the direction output pins. <gah> function measures the change in position since last scan and adds this to x\_pos and y\_pos.
+						Relative Moves are treated by the rest of the code as usual. Absolute Moves must be preceded by a Preset Current Position command with the position set to x\_pos and y\_pos. A function monitors the directional state of the AMCI 3401 modules and mirrors this onto the direction output pins. The same function measures the change in position since last scan and adds this to x\_pos and y\_pos.
 					\item[Manual Move] \hfill \\
-						All manual moves, whether clockwise or anticlockwise, are sent to the AMCI 3401 modules as Manual Move Clockwise at the correct speed. The x\_direction and y\_direction bits need to be explicitly set with each Manual Move command to operate in the required direction. Since the AMCI 3401 module thinks it is always moving clockwise (even when it's not), it's internal position state is no longer correct. Function <gah> measures the change in position since last scan and depending on the direction of movement, adds or subtracts this value to x\_pos and y\_pos.
+						All manual moves, whether clockwise or anticlockwise, are sent to the AMCI 3401 modules as Manual Move Clockwise at the correct speed. The x\_direction and y\_direction bits need to be explicitly set with each Manual Move command to operate in the required direction. Since the AMCI 3401 module thinks it is always moving clockwise (even when it's not), it's internal position state is no longer correct. Another function measures the change in position since last scan and depending on the direction of movement, adds or subtracts this value to x\_pos and y\_pos.
 					\item[Preset Current Position] \hfill \\
 						Change the value of x\_pos and y\_pos to mirror the position state in the AMCI 3401 controller.
 				\end{description}
