@@ -113,7 +113,7 @@ This section gives an overview to the design of the hardware control system, imp
 	\label{sec:stepperdirectionmanagement}
 			Empirical observation of the AMCI 3401 modules in operation showed a significant delay (in the order of 2-3 seconds) between distinct commands. This delay was also present when switching between the Manual Move Clockwise and the Manual Move Counterclockwise commands. In contrast, changing the programmed speed while in either manual move state had negligible delay.
 			
-			This behaviour was a significant issue since the optimized velocity profiles require both axes to track the commands within the period of sampling (in the order of 30-150ms) to follow the required path and as such a 2-3 second delay would prevent proper operation.
+			This behaviour was a significant issue since the optimized velocity profiles require both axes to track the commands within a period of sampling on the order of 30-150ms. This is necessary to follow the desired path and as such a 2-3 second delay would prevent proper operation.
 			
 			To overcome this problem, the DoodleBot controls the direction output via the PLC embedded DC output pins 0 and 1. Direction control is hence done  through code in the motorControl program rather than allow the AMCI 3401 modules to handle the task. The modules will just be constantly run with 'clockwise' commands and assume they are never making the direction switch. 
 			
@@ -122,7 +122,7 @@ This section gives an overview to the design of the hardware control system, imp
 			Please see Appendix ~\ref{sec:PLC-flowcharts-pos} for more detail on how this part of the code works. A flowchart of this code can be found in Figure ~\ref{fig:Direction and Positional Tracking}.
 			
 	\subsubsection{Draw Mode Initialisation - Dummy Commands}
-			Section ~\ref{stepperdirectionmanagement} identified a method to eliminate the effect of the Stepper Motor lag between distinct commands by always commanding the AMCI 3401 modules to run in the same direction and controlling the Direction separately. There was however, still the initial lag when starting a velocity profile.
+			Section ~\ref{sec:stepperdirectionmanagement} identified a method to eliminate the effect of the Stepper Motor lag between distinct commands by always commanding the AMCI 3401 modules to run in the same direction and controlling the direction separately. There was however, still the initial lag when starting a velocity profile.
 			
 			To overcome this every velocity profile is padded with some 'dummy' commands that have the machine travel back very slowly and forth at the sample rate  (in the order of single steps), which means there is no noticeably drawn content. The command lag will means only these 'dummy commands' are skipped and ensures that when the real commands are processed they aren't skipped.
 			
@@ -133,9 +133,9 @@ This section gives an overview to the design of the hardware control system, imp
 			
 			The important note of this model to effect is that the internal timer is reset on every new programmed speed received. This assumption was made due to the observed effect of programmed speeds below a certain threshold not causing any movement. The model would explain the issue since if the period of step output is greater than the sample period, the timer would never actually approach the time in which it generates its first step and would keep resetting back to 0 with every command.
 			
-			Thus if this model were correct, there would be a minimum programmed speed threshold for the stepper modules to be able to move at all equal to $Speed_{minimum} = 1000ms/Sample_{time}$. So at 40ms, the minimum speed threshold would be 25 steps/second.
+			Thus if this model were correct, there would be a minimum programmed speed threshold for the stepper modules to be able to move at all equal to $\text{Speed}_{minimum} = \frac{1000ms}{\text{Sample time (ms)}}$. So at 40ms, the minimum speed threshold would be 25 steps/second.
 			
-			To alleviate this effect, the DoodleBot has code that sets any code below this threshold to be equal to the minimum speed (except where the axis is completely stationary). 
+			To alleviate this effect, the DoodleBot has code that sets any movement below this threshold to be equal to the minimum speed (except for where the axis is completely stationary). 
 			
 			Further testing confirmed significantly better results. There are theoretical inaccuracies caused by the fact any velocity information below the threshold is lost, however this is significantly outweighed by the significant improvements found by using this fix. 
 
